@@ -1,0 +1,183 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Users {
+  id  String @id @default(uuid()) 
+  email String @unique
+  username String @unique
+  fullname String
+  birthdate DateTime
+  password String //Hashed Password
+  isValidated Boolean @default(false)
+  otp Int? 
+  role Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  publishedJobs Jobs[]
+
+  hrNotifications Notifications[]
+
+  @@map("users")
+}
+
+model Applicants {
+  id  String @id @default(uuid()) 
+  email String @unique
+  password String //Hashed Password
+  fullname String
+  birthdate DateTime
+  about String?
+  isValidated Boolean @default(false)
+  otp Int? 
+  role Role
+  profileImgUrl String?
+  gender Gender
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resumes Resumes[]
+
+  interviewSchedules InterviewSchedules[]
+
+  appliedJobs ApplicantJobs[]
+
+  notifications Notifications[]
+
+  @@map("applicants")
+}
+
+model Jobs {
+  id  String @id @default(uuid()) 
+  position String
+  jobLocType JobLocationType 
+  empType EmploymentType 
+  publisher Users @relation(fields: [publisherId],references: [id])
+  publisherId String 
+  qualification String
+  description String
+  deadline DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  Resumes Resumes[]
+
+  interviewSchedules InterviewSchedules[]
+
+  applicantJobs ApplicantJobs[]
+
+  @@map("jobs")
+}
+
+
+
+model Resumes {
+  id  String @id @default(uuid()) 
+  applicant Applicants @relation(fields: [applicantId], references: [id])
+  applicantId String 
+  job Jobs @relation(fields: [jobId], references: [id])
+  jobId String 
+  resumeName String
+  resumeUrl String
+  submittedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@map("resumes")
+}
+
+model InterviewSchedules{
+  id  String @id @default(uuid())
+  applicant Applicants @relation(fields: [applicantId], references: [id])
+  applicantId String 
+  job Jobs @relation(fields: [jobId], references: [id])
+  jobId String 
+  scheduleDate DateTime
+  scheduleTime DateTime
+  location String?
+  status ScheduleStatus
+  mode InterviewMode
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@map("interview_schedules")
+}
+
+model ApplicantJobs {
+  id  String @id @default(uuid()) 
+  applicant Applicants @relation(fields: [applicantId], references: [id])
+  applicantId String 
+  job Jobs @relation(fields: [jobId], references: [id])
+  jobId String
+  status JobStatus
+  appliedAt DateTime @default(now())
+  
+  @@map("applicant_jobs")
+}
+
+
+model Notifications{
+  id  String @id @default(uuid()) 
+  applicant Applicants? @relation(fields: [applicantId], references: [id])
+  applicantId String? 
+  hr Users? @relation(fields: [hrId], references: [id])
+  hrId String? 
+  title String
+  message String
+  isRead Boolean @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum Role {
+  ADMIN
+  HR
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum JobLocationType {
+  REMOTE
+  ONSITE
+}
+
+enum EmploymentType {
+  FULLTIME
+  INTERNSHIP
+}
+
+enum JobStatus {
+  PENDING
+  REVIEWED
+  REJECTED
+  ACCEPTED
+}
+
+enum InterviewMode {
+  OFFLINE
+  ONLINE
+}
+
+enum ScheduleStatus {
+  CONFIRMED
+  RESCHEDULED
+  CANCELED
+  COMPLETED
+}
