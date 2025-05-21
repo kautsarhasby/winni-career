@@ -44,12 +44,10 @@ model Applicants {
   about String?
   isValidated Boolean @default(false)
   otp Int? 
-  role Role
   profileImgUrl String?
   gender Gender
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   resumes Resumes[]
 
   interviewSchedules InterviewSchedules[]

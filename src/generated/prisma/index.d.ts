@@ -2893,7 +2893,6 @@ export namespace Prisma {
     about: string | null
     isValidated: boolean | null
     otp: number | null
-    role: $Enums.Role | null
     profileImgUrl: string | null
     gender: $Enums.Gender | null
     createdAt: Date | null
@@ -2909,7 +2908,6 @@ export namespace Prisma {
     about: string | null
     isValidated: boolean | null
     otp: number | null
-    role: $Enums.Role | null
     profileImgUrl: string | null
     gender: $Enums.Gender | null
     createdAt: Date | null
@@ -2925,7 +2923,6 @@ export namespace Prisma {
     about: number
     isValidated: number
     otp: number
-    role: number
     profileImgUrl: number
     gender: number
     createdAt: number
@@ -2951,7 +2948,6 @@ export namespace Prisma {
     about?: true
     isValidated?: true
     otp?: true
-    role?: true
     profileImgUrl?: true
     gender?: true
     createdAt?: true
@@ -2967,7 +2963,6 @@ export namespace Prisma {
     about?: true
     isValidated?: true
     otp?: true
-    role?: true
     profileImgUrl?: true
     gender?: true
     createdAt?: true
@@ -2983,7 +2978,6 @@ export namespace Prisma {
     about?: true
     isValidated?: true
     otp?: true
-    role?: true
     profileImgUrl?: true
     gender?: true
     createdAt?: true
@@ -3086,7 +3080,6 @@ export namespace Prisma {
     about: string | null
     isValidated: boolean
     otp: number | null
-    role: $Enums.Role
     profileImgUrl: string | null
     gender: $Enums.Gender
     createdAt: Date
@@ -3121,7 +3114,6 @@ export namespace Prisma {
     about?: boolean
     isValidated?: boolean
     otp?: boolean
-    role?: boolean
     profileImgUrl?: boolean
     gender?: boolean
     createdAt?: boolean
@@ -3142,7 +3134,6 @@ export namespace Prisma {
     about?: boolean
     isValidated?: boolean
     otp?: boolean
-    role?: boolean
     profileImgUrl?: boolean
     gender?: boolean
     createdAt?: boolean
@@ -3158,7 +3149,6 @@ export namespace Prisma {
     about?: boolean
     isValidated?: boolean
     otp?: boolean
-    role?: boolean
     profileImgUrl?: boolean
     gender?: boolean
     createdAt?: boolean
@@ -3174,14 +3164,13 @@ export namespace Prisma {
     about?: boolean
     isValidated?: boolean
     otp?: boolean
-    role?: boolean
     profileImgUrl?: boolean
     gender?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ApplicantsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "fullname" | "birthdate" | "about" | "isValidated" | "otp" | "role" | "profileImgUrl" | "gender" | "createdAt" | "updatedAt", ExtArgs["result"]["applicants"]>
+  export type ApplicantsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "fullname" | "birthdate" | "about" | "isValidated" | "otp" | "profileImgUrl" | "gender" | "createdAt" | "updatedAt", ExtArgs["result"]["applicants"]>
   export type ApplicantsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     resumes?: boolean | Applicants$resumesArgs<ExtArgs>
     interviewSchedules?: boolean | Applicants$interviewSchedulesArgs<ExtArgs>
@@ -3209,7 +3198,6 @@ export namespace Prisma {
       about: string | null
       isValidated: boolean
       otp: number | null
-      role: $Enums.Role
       profileImgUrl: string | null
       gender: $Enums.Gender
       createdAt: Date
@@ -3649,7 +3637,6 @@ export namespace Prisma {
     readonly about: FieldRef<"Applicants", 'String'>
     readonly isValidated: FieldRef<"Applicants", 'Boolean'>
     readonly otp: FieldRef<"Applicants", 'Int'>
-    readonly role: FieldRef<"Applicants", 'Role'>
     readonly profileImgUrl: FieldRef<"Applicants", 'String'>
     readonly gender: FieldRef<"Applicants", 'Gender'>
     readonly createdAt: FieldRef<"Applicants", 'DateTime'>
@@ -9824,7 +9811,6 @@ export namespace Prisma {
     about: 'about',
     isValidated: 'isValidated',
     otp: 'otp',
-    role: 'role',
     profileImgUrl: 'profileImgUrl',
     gender: 'gender',
     createdAt: 'createdAt',
@@ -10198,7 +10184,6 @@ export namespace Prisma {
     about?: StringNullableFilter<"Applicants"> | string | null
     isValidated?: BoolFilter<"Applicants"> | boolean
     otp?: IntNullableFilter<"Applicants"> | number | null
-    role?: EnumRoleFilter<"Applicants"> | $Enums.Role
     profileImgUrl?: StringNullableFilter<"Applicants"> | string | null
     gender?: EnumGenderFilter<"Applicants"> | $Enums.Gender
     createdAt?: DateTimeFilter<"Applicants"> | Date | string
@@ -10218,7 +10203,6 @@ export namespace Prisma {
     about?: SortOrderInput | SortOrder
     isValidated?: SortOrder
     otp?: SortOrderInput | SortOrder
-    role?: SortOrder
     profileImgUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
     createdAt?: SortOrder
@@ -10241,7 +10225,6 @@ export namespace Prisma {
     about?: StringNullableFilter<"Applicants"> | string | null
     isValidated?: BoolFilter<"Applicants"> | boolean
     otp?: IntNullableFilter<"Applicants"> | number | null
-    role?: EnumRoleFilter<"Applicants"> | $Enums.Role
     profileImgUrl?: StringNullableFilter<"Applicants"> | string | null
     gender?: EnumGenderFilter<"Applicants"> | $Enums.Gender
     createdAt?: DateTimeFilter<"Applicants"> | Date | string
@@ -10261,7 +10244,6 @@ export namespace Prisma {
     about?: SortOrderInput | SortOrder
     isValidated?: SortOrder
     otp?: SortOrderInput | SortOrder
-    role?: SortOrder
     profileImgUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
     createdAt?: SortOrder
@@ -10285,7 +10267,6 @@ export namespace Prisma {
     about?: StringNullableWithAggregatesFilter<"Applicants"> | string | null
     isValidated?: BoolWithAggregatesFilter<"Applicants"> | boolean
     otp?: IntNullableWithAggregatesFilter<"Applicants"> | number | null
-    role?: EnumRoleWithAggregatesFilter<"Applicants"> | $Enums.Role
     profileImgUrl?: StringNullableWithAggregatesFilter<"Applicants"> | string | null
     gender?: EnumGenderWithAggregatesFilter<"Applicants"> | $Enums.Gender
     createdAt?: DateTimeWithAggregatesFilter<"Applicants"> | Date | string
@@ -10773,7 +10754,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -10793,7 +10773,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -10813,7 +10792,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10833,7 +10811,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10853,7 +10830,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -10869,7 +10845,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10885,7 +10860,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11524,7 +11498,6 @@ export namespace Prisma {
     about?: SortOrder
     isValidated?: SortOrder
     otp?: SortOrder
-    role?: SortOrder
     profileImgUrl?: SortOrder
     gender?: SortOrder
     createdAt?: SortOrder
@@ -11544,7 +11517,6 @@ export namespace Prisma {
     about?: SortOrder
     isValidated?: SortOrder
     otp?: SortOrder
-    role?: SortOrder
     profileImgUrl?: SortOrder
     gender?: SortOrder
     createdAt?: SortOrder
@@ -11560,7 +11532,6 @@ export namespace Prisma {
     about?: SortOrder
     isValidated?: SortOrder
     otp?: SortOrder
-    role?: SortOrder
     profileImgUrl?: SortOrder
     gender?: SortOrder
     createdAt?: SortOrder
@@ -13265,7 +13236,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13284,7 +13254,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13354,7 +13323,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13373,7 +13341,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13433,7 +13400,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13452,7 +13418,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13522,7 +13487,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13541,7 +13505,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13601,7 +13564,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13620,7 +13582,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13690,7 +13651,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13709,7 +13669,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13769,7 +13728,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13788,7 +13746,6 @@ export namespace Prisma {
     about?: string | null
     isValidated?: boolean
     otp?: number | null
-    role: $Enums.Role
     profileImgUrl?: string | null
     gender: $Enums.Gender
     createdAt?: Date | string
@@ -13858,7 +13815,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13877,7 +13833,6 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     isValidated?: BoolFieldUpdateOperationsInput | boolean
     otp?: NullableIntFieldUpdateOperationsInput | number | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profileImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

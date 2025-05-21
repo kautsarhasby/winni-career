@@ -140,7 +140,6 @@ exports.Prisma.ApplicantsScalarFieldEnum = {
   about: 'about',
   isValidated: 'isValidated',
   otp: 'otp',
-  role: 'role',
   profileImgUrl: 'profileImgUrl',
   gender: 'gender',
   createdAt: 'createdAt',
