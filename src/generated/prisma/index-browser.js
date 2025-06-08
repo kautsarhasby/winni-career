@@ -126,6 +126,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   password: 'password',
   isValidated: 'isValidated',
   otp: 'otp',
+  expiredAt: 'expiredAt',
+  verified: 'verified',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -140,6 +142,8 @@ exports.Prisma.ApplicantsScalarFieldEnum = {
   about: 'about',
   isValidated: 'isValidated',
   otp: 'otp',
+  expiredAt: 'expiredAt',
+  verified: 'verified',
   profileImgUrl: 'profileImgUrl',
   gender: 'gender',
   createdAt: 'createdAt',

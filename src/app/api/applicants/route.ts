@@ -32,11 +32,13 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const data: IApplicants = await request.json();
 
+  const new_birthdate = new Date(data.birthdate);
+
   await prisma.$transaction([
     prisma.applicants.create({
       data: {
         email: data.email,
-        birthdate: data.birthdate,
+        birthdate: new_birthdate,
         fullname: data.fullname,
         password: data.password,
         gender: data.gender,
@@ -44,6 +46,7 @@ export async function POST(request: NextRequest) {
     }),
   ]);
 
+  console.log(data);
   return Response.json(
     { message: "Successfully added data", data },
     { status: 200 }

@@ -24,6 +24,8 @@ model Users {
   password String //Hashed Password
   isValidated Boolean @default(false)
   otp Int? 
+  expiredAt DateTime? @db.Timestamptz()
+  verified Boolean @default(false)
   role Role
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -44,6 +46,8 @@ model Applicants {
   about String?
   isValidated Boolean @default(false)
   otp Int? 
+  expiredAt DateTime? @db.Timestamptz()
+  verified Boolean @default(false)
   profileImgUrl String?
   gender Gender
   createdAt DateTime @default(now())
