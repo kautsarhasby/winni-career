@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const data: IApplicants = await request.json();
+  const data = await request.json();
 
   const new_birthdate = new Date(data.birthdate);
 
@@ -40,8 +40,9 @@ export async function POST(request: NextRequest) {
         email: data.email,
         birthdate: new_birthdate,
         fullname: data.fullname,
-        password: data.password,
+        password: "",
         gender: data.gender,
+        account_type: "GOOGLE",
       },
     }),
   ]);

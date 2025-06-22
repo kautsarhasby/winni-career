@@ -31,12 +31,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const data: IJobs = await request.json();
-
-  await prisma.$transaction([
-    prisma.jobs.create({
-      data,
-    }),
-  ]);
+  console.log(data);
+  await prisma.jobs.create({ data });
 
   return Response.json(
     { message: "Successfully added data", data },

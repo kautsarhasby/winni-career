@@ -3,24 +3,20 @@ import { IUsers } from "../../../../types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
+  const role = request.nextUrl.searchParams.get("role")?.toString() || "";
 
-  if (!uuid) {
-    const users = await prisma.users.findMany();
+  if (role === "admin") {
+    const admin = await prisma.users.findMany({ where: { role: "ADMIN" } });
 
-    return Response.json({ message: "User found", data: users });
+    return Response.json({ message: "Admin found", data: admin });
+  } else if (role === "hr") {
+    const hr = await prisma.users.findMany({ where: { role: "HR" } });
+
+    return Response.json({ message: "Hr found", data: hr });
   }
-  const findedUser = await prisma.users.findFirst({ where: { id: uuid } });
-
-  if (!findedUser)
-    return Response.json(
-      { message: "UUID not found, please check again" },
-      { status: 404 }
-    );
-
   return Response.json(
-    { message: "Success retrieved all data", data: findedUser },
-    { status: 200 }
+    { message: "role not found, please check again" },
+    { status: 404 }
   );
 }
 

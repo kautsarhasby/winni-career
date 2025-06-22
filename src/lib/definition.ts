@@ -1,3 +1,4 @@
+import { JWTPayload } from "jose";
 import { z } from "zod";
 
 export const SignupFormApplicantSchema = z.object({
@@ -21,6 +22,11 @@ export const SignupFormApplicantSchema = z.object({
   }),
 });
 
+export const SignInFormApplicationSchema = SignupFormApplicantSchema.pick({
+  email: true,
+  password: true,
+});
+
 export const SignupFormUserSchema = SignupFormApplicantSchema.omit({
   gender: true,
 }).extend({ username: z.string().min(5) });
@@ -32,17 +38,30 @@ export const SendOTPSchema = SignupFormApplicantSchema.pick({
 
 export const SendOTPVerificationSchema = SendOTPSchema.omit({
   otp: true,
-}).extend({ id: z.string() });
+});
 
-export const VerifyOTPSchema = SendOTPSchema.omit({ fullname: true });
+export const VerifyOTPSchema = SendOTPSchema.omit({
+  fullname: true,
+  email: true,
+});
+
+export interface SessionPayload extends JWTPayload {
+  email: string;
+  fullname: string | undefined;
+  expiredOTP: Date | null | undefined;
+}
 
 export type FormState =
   | {
+      values?: Partial<z.infer<typeof SignupFormApplicantSchema>>;
       errors?: {
-        name?: string[];
+        fullname?: string[];
         email?: string[];
         password?: string[];
+        gender?: string[];
+        birthdate?: string[];
       };
       message?: string;
+      success?: boolean;
     }
   | undefined;

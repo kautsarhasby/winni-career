@@ -124,8 +124,6 @@ exports.Prisma.UsersScalarFieldEnum = {
   fullname: 'fullname',
   birthdate: 'birthdate',
   password: 'password',
-  isValidated: 'isValidated',
-  otp: 'otp',
   expiredAt: 'expiredAt',
   verified: 'verified',
   role: 'role',
@@ -139,8 +137,8 @@ exports.Prisma.ApplicantsScalarFieldEnum = {
   password: 'password',
   fullname: 'fullname',
   birthdate: 'birthdate',
+  account_type: 'account_type',
   about: 'about',
-  isValidated: 'isValidated',
   otp: 'otp',
   expiredAt: 'expiredAt',
   verified: 'verified',
@@ -194,6 +192,14 @@ exports.Prisma.ApplicantJobsScalarFieldEnum = {
   appliedAt: 'appliedAt'
 };
 
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  applicantId: 'applicantId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.NotificationsScalarFieldEnum = {
   id: 'id',
   applicantId: 'applicantId',
@@ -221,6 +227,11 @@ exports.Prisma.NullsOrder = {
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
   HR: 'HR'
+};
+
+exports.AccountType = exports.$Enums.AccountType = {
+  GOOGLE: 'GOOGLE',
+  CREDENTIALS: 'CREDENTIALS'
 };
 
 exports.Gender = exports.$Enums.Gender = {
@@ -264,6 +275,7 @@ exports.Prisma.ModelName = {
   Resumes: 'Resumes',
   InterviewSchedules: 'InterviewSchedules',
   ApplicantJobs: 'ApplicantJobs',
+  PasswordResetToken: 'PasswordResetToken',
   Notifications: 'Notifications'
 };
 

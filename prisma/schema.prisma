@@ -22,8 +22,6 @@ model Users {
   fullname String
   birthdate DateTime
   password String //Hashed Password
-  isValidated Boolean @default(false)
-  otp Int? 
   expiredAt DateTime? @db.Timestamptz()
   verified Boolean @default(false)
   role Role
@@ -43,8 +41,8 @@ model Applicants {
   password String //Hashed Password
   fullname String
   birthdate DateTime
+  account_type AccountType @default(CREDENTIALS)
   about String?
-  isValidated Boolean @default(false)
   otp Int? 
   expiredAt DateTime? @db.Timestamptz()
   verified Boolean @default(false)
@@ -59,6 +57,8 @@ model Applicants {
   appliedJobs ApplicantJobs[]
 
   notifications Notifications[]
+
+  PasswordResetToken PasswordResetToken[]
 
   @@map("applicants")
 }
@@ -130,6 +130,16 @@ model ApplicantJobs {
   @@map("applicant_jobs")
 }
 
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  applicantId    String
+  applicant      Applicants     @relation(fields: [applicantId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("password_reset_token")
+}
 
 model Notifications{
   id  String @id @default(uuid()) 
@@ -148,6 +158,11 @@ model Notifications{
 enum Role {
   ADMIN
   HR
+}
+
+enum AccountType {
+  GOOGLE
+  CREDENTIALS
 }
 
 enum Gender {

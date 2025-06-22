@@ -16,19 +16,17 @@ datasource db {
 }
 
 model Users {
-  id          String    @id @default(uuid())
-  email       String    @unique
-  username    String    @unique
-  fullname    String
-  birthdate   DateTime
-  password    String //Hashed Password
-  isValidated Boolean   @default(false)
-  otp         Int?
-  expiredAt   DateTime? @db.Timestamptz()
-  verified    Boolean   @default(false)
-  role        Role
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String    @id @default(uuid())
+  email     String    @unique
+  username  String    @unique
+  fullname  String
+  birthdate DateTime
+  password  String //Hashed Password
+  expiredAt DateTime? @db.Timestamptz()
+  verified  Boolean   @default(false)
+  role      Role
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   publishedJobs Jobs[]
 
@@ -38,20 +36,20 @@ model Users {
 }
 
 model Applicants {
-  id            String    @id @default(uuid())
-  email         String    @unique
+  id            String      @id @default(uuid())
+  email         String      @unique
   password      String //Hashed Password
   fullname      String
   birthdate     DateTime
+  account_type  AccountType @default(CREDENTIALS)
   about         String?
-  isValidated   Boolean   @default(false)
   otp           Int?
-  expiredAt     DateTime? @db.Timestamptz()
-  verified      Boolean   @default(false)
+  expiredAt     DateTime?   @db.Timestamptz()
+  verified      Boolean     @default(false)
   profileImgUrl String?
   gender        Gender
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   resumes       Resumes[]
 
   interviewSchedules InterviewSchedules[]
@@ -59,6 +57,8 @@ model Applicants {
   appliedJobs ApplicantJobs[]
 
   notifications Notifications[]
+
+  PasswordResetToken PasswordResetToken[]
 
   @@map("applicants")
 }
@@ -128,6 +128,17 @@ model ApplicantJobs {
   @@map("applicant_jobs")
 }
 
+model PasswordResetToken {
+  id          String     @id @default(uuid())
+  token       String     @unique
+  applicantId String
+  applicant   Applicants @relation(fields: [applicantId], references: [id])
+  expiresAt   DateTime
+  createdAt   DateTime   @default(now())
+
+  @@map("password_reset_token")
+}
+
 model Notifications {
   id          String      @id @default(uuid())
   applicant   Applicants? @relation(fields: [applicantId], references: [id])
@@ -145,6 +156,11 @@ model Notifications {
 enum Role {
   ADMIN
   HR
+}
+
+enum AccountType {
+  GOOGLE
+  CREDENTIALS
 }
 
 enum Gender {
