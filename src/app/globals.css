@@ -130,3 +130,7 @@ li {
   margin-left: 1em;
   padding-left: 0;
 }
+
+.font-changa {
+  font-family: var(--font-changa-one), cursive;
+}

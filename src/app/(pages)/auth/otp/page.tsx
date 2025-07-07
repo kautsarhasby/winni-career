@@ -10,9 +10,16 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { FormEvent, useEffect, useState } from "react";
 import CountDown from "react-countdown";
 import { renderer } from "@/components/public/countdown";
-import { cookies } from "next/headers";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import FooterInput from "@/components/public/footer-input";
 
 export default function OTPPage() {
   const [otpMessage, setOTPMessage] = useState<string>("");
@@ -55,43 +62,65 @@ export default function OTPPage() {
   };
 
   return (
-    <main className="justify-center items-center flex flex-col h-screen">
-      <h1>OTP Telah dikirim</h1>
+    <main className="h-screen w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
+      <div className="absolute top-10 left-10">
+        <p className="font-changa text-4xl">WinniCareer</p>
+      </div>
+      <section className="w-[550px] h-full flex items-center ">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Verifikasi Akun</CardTitle>
+            <CardDescription>
+              OTP telah dikirim melalui email youremail@example.com, silahkan
+              masukkan OTP di kolom berikut
+            </CardDescription>
+          </CardHeader>
 
-      {expiredOTP ? (
-        <CountDown date={expiredOTP} renderer={renderer} />
-      ) : (
-        "00 : 00"
-      )}
-
-      <form
-        action=""
-        onSubmit={submitted}
-        className="flex justify-center flex-col"
-      >
-        <InputOTP
-          maxLength={6}
-          pattern={REGEXP_ONLY_DIGITS}
-          className="mb-3"
-          name="otp"
-        >
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-          </InputOTPGroup>
-          <InputOTPSeparator />
-          <InputOTPGroup>
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
-        {otpMessage && <p className="text-red-500">{otpMessage}</p>}
-        <Button type="submit">
-          {isPending ? <LoaderCircle className="animate-spin" /> : "Submit"}
-        </Button>
-      </form>
+          <CardContent className="flex flex-col items-center gap-3 w-full">
+            {expiredOTP ? (
+              <CountDown date={expiredOTP} renderer={renderer} />
+            ) : (
+              "00 : 00"
+            )}
+            <form
+              action=""
+              onSubmit={submitted}
+              className="flex justify-center items-center flex-col w-full gap-3"
+            >
+              <InputOTP
+                maxLength={6}
+                pattern={REGEXP_ONLY_DIGITS}
+                className="mb-3 "
+                name="otp"
+              >
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                </InputOTPGroup>
+                <InputOTPSeparator />
+                <InputOTPGroup>
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+              {otpMessage && <p className="text-red-500">{otpMessage}</p>}
+              <Button type="submit" className="bg-[#5271FF] text-white w-3/4">
+                {isPending ? (
+                  <LoaderCircle className="animate-spin" />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+            </form>
+            <div>
+              <Button disabled>Kirim ulang OTP</Button>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+      <FooterInput />
     </main>
   );
 }

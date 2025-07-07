@@ -18,18 +18,20 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <main className="w-full h-[100px] flex justify-between p-4">
+    <main className="w-full h-[100px] flex justify-between z-30 p-4 top-0 sticky bg-[#111111]">
       <section className="flex items-center gap-2">
         <Avatar className="w-[58px] h-[58px]">
           <AvatarImage src="https://winnicode.com/mazer/images/logo.png" />
         </Avatar>
-        <h1 className="font-bold">WinniCareer</h1>
+        <h1 className="font-changa text-[#FF66C4] text-2xl">
+          Winni<span className="text-[#5271FF]">Career</span>
+        </h1>
       </section>
-      <section>
-        <Button variant={"ghost"} asChild>
+      <section className="flex items-center">
+        <Button variant={"ghost"} className="text-xl" asChild>
           <Link href={"https://winnicode.com/explore/berita"}>Berita</Link>
         </Button>
-        <Button variant={"ghost"} asChild>
+        <Button variant={"ghost"} className="text-xl" asChild>
           <Link href={"https://winnicode.com/tentang"}>Tentang</Link>
         </Button>
         {session ? (
@@ -51,10 +53,16 @@ export default function Navbar() {
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <Link href={"/dashboard"}>Dashboard</Link>
+                  <Link href={"/dashboard"} className="w-full">
+                    Dashboard
+                  </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={"/profile"} className="w-full">
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
 
@@ -62,6 +70,7 @@ export default function Navbar() {
                 <Button
                   variant={"ghost"}
                   onClick={() => signOut({ callbackUrl: "/" })}
+                  className="w-full"
                 >
                   Log out
                 </Button>
@@ -71,7 +80,7 @@ export default function Navbar() {
         ) : (
           <>
             <Button
-              className="hover:cursor-pointer bg-[#5271FF] text-white"
+              className="hover:cursor-pointer bg-[#5271FF] text-white text-xl"
               asChild
             >
               <Link href={"/auth/sign_in"}>Masuk</Link>

@@ -6,7 +6,15 @@ export default withAuth(
     const token = req.nextauth.token;
     const { pathname } = req.nextUrl;
 
+    if (pathname.match(/^\/jobs\/[^\/]+\/apply$/) && !token) {
+      return NextResponse.redirect(new URL("/auth/sign_in", req.url));
+    }
+
     if (!token) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    if (pathname.startsWith("/auth") && token) {
       return NextResponse.redirect(new URL("/", req.url));
     }
 
@@ -30,5 +38,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/jobs/:id/apply"],
 };

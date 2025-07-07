@@ -1,4 +1,5 @@
 "use client";
+import FooterInput from "@/components/public/footer-input";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,32 +12,38 @@ export default function EmailPage() {
     mutationFn: async () => {},
   });
   return (
-    <main className="h-screen flex items-center justify-center">
-      <section className="bg-[#111110]  w-1/4 p-6 rounded-lg flex flex-col ">
-        <div className="mb-3">
-          <h2 className="font-bold text-start w-full text-2xl">
-            Forgot Password
-          </h2>
-          <p>Fill up the form to reset the password</p>
-        </div>
-        <form action="" className="w-full mb-3">
+    <main className="h-screen relative w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
+      <div className="absolute top-10 left-10">
+        <p className="font-changa text-4xl">WinniCareer</p>
+      </div>
+      <section className="h-full flex w-1/4 items-center">
+        <section className="bg-[#111110] w-full p-6 rounded-lg flex flex-col justify-center">
           <div className="mb-3">
-            <Label className="mb-2">Email address</Label>
-            <Input type="email" placeholder="Email" />
+            <h2 className="font-bold text-start w-full text-2xl">
+              Lupa Password
+            </h2>
+            <p>Masukkan Email yang terdaftar untuk mendapatkan kode OTP</p>
           </div>
-          <Button type="submit" className="w-full">
-            Sign in
-          </Button>
-        </form>
-        <div className="w-full text-center ">
-          <p>
-            Not register yet ?{" "}
-            <Link href={"/"} className="font-bold">
-              Register now
-            </Link>
-          </p>
-        </div>
+          <form action="" className="w-full mb-3">
+            <div className="mb-3">
+              <Label className="mb-2">Email address</Label>
+              <Input type="email" placeholder="Email" />
+            </div>
+            <Button type="submit" className="w-full">
+              Kirim
+            </Button>
+          </form>
+          <div className="w-full text-center ">
+            <p>
+              Belum punya akun ?{" "}
+              <Link href={"/"} className="font-bold">
+                Daftar
+              </Link>
+            </p>
+          </div>
+        </section>
       </section>
+      <FooterInput />
     </main>
   );
 }
