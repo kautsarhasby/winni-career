@@ -8,8 +8,7 @@ import {
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { FormEvent, useEffect, useState } from "react";
-import CountDown from "react-countdown";
-import { renderer } from "@/components/public/countdown";
+import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
 import {
@@ -20,10 +19,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import FooterInput from "@/components/public/footer-input";
+import CountDownOTP from "@/components/public/countdown";
+import { useRouter } from "next/navigation";
 
 export default function OTPPage() {
   const [otpMessage, setOTPMessage] = useState<string>("");
   const [expiredOTP, setExpiredOTP] = useState<number>();
+  const router = useRouter();
 
   useEffect(() => {
     const getCookie = async () => {
@@ -52,6 +54,10 @@ export default function OTPPage() {
         setOTPMessage(data.message);
       }
     },
+    onSuccess: () => {
+      Cookies.remove("session");
+      router.push("auth/sign_in");
+    },
   });
 
   const submitted = async (event: FormEvent<HTMLFormElement>) => {
@@ -77,11 +83,7 @@ export default function OTPPage() {
           </CardHeader>
 
           <CardContent className="flex flex-col items-center gap-3 w-full">
-            {expiredOTP ? (
-              <CountDown date={expiredOTP} renderer={renderer} />
-            ) : (
-              "00 : 00"
-            )}
+            {expiredOTP ? <CountDownOTP expiredOTP={expiredOTP} /> : "Loading"}
             <form
               action=""
               onSubmit={submitted}
@@ -114,9 +116,6 @@ export default function OTPPage() {
                 )}
               </Button>
             </form>
-            <div>
-              <Button disabled>Kirim ulang OTP</Button>
-            </div>
           </CardContent>
         </Card>
       </section>

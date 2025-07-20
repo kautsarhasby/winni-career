@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { IApplicants } from "../../../../types";
+import { IApplicants } from "@/types";
 import { sendOTPVerification } from "@/lib/email/services/otp";
 
 export async function POST(request: NextRequest) {

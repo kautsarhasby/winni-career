@@ -4,13 +4,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useMutation } from "@tanstack/react-query";
+import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { FormEvent, useState } from "react";
 
 export default function EmailPage() {
-  const { isPending, mutate, data } = useMutation({
-    mutationFn: async () => {},
+  const [email, setEmail] = useState("");
+  const { isPending, mutate } = useMutation({
+    mutationFn: async () => {
+      await fetch("/api/reset", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
   });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate();
+  };
   return (
     <main className="h-screen relative w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
       <div className="absolute top-10 left-10">
@@ -24,13 +39,19 @@ export default function EmailPage() {
             </h2>
             <p>Masukkan Email yang terdaftar untuk mendapatkan kode OTP</p>
           </div>
-          <form action="" className="w-full mb-3">
+          <form onSubmit={handleSubmit} className="w-full mb-3">
             <div className="mb-3">
               <Label className="mb-2">Email address</Label>
-              <Input type="email" placeholder="Email" />
+              <Input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <Button type="submit" className="w-full">
-              Kirim
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? <LoaderCircle className="animate-spin" /> : "Kirim"}
             </Button>
           </form>
           <div className="w-full text-center ">

@@ -27,18 +27,19 @@ export async function sendOtpEmail({
 export async function sendResetEmail({
   email,
   fullname,
+  resetLink,
 }: {
   email: string;
   fullname: string;
   resetLink?: string;
 }) {
-  const emailTemplate = await createEmailTemplate({ fullname });
+  const emailTemplate = await createEmailTemplate({ fullname, resetLink });
 
   try {
     await client.sendMail({
       from: `"Winni Career" <${process.env.EMAIL_ADDRESS}>`,
       to: email,
-      subject: "reset Password",
+      subject: "Reset Password",
       html: emailTemplate,
     });
 

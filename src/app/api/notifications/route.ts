@@ -1,32 +1,24 @@
 import { prisma } from "@/lib/prisma-client";
-import { INotifications } from "../../../../types";
-import { NextRequest } from "next/server";
+import { INotifications } from "@/types";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const applicantId = searchParams.get("applicantId");
 
-  if (!uuid) {
-    const notifications = await prisma.notifications.findMany();
-
-    return Response.json({
-      message: "Success retrieved all data",
-      data: notifications,
-    });
+  if (!applicantId) {
+    return NextResponse.json(
+      { message: "Missing applicantId" },
+      { status: 400 }
+    );
   }
-  const findedNotification = await prisma.notifications.findFirst({
-    where: { id: uuid },
+
+  const notifications = await prisma.notifications.findMany({
+    where: { applicantId },
+    orderBy: { createdAt: "desc" },
   });
 
-  if (!findedNotification)
-    return Response.json(
-      { message: "UUID not found, please check again" },
-      { status: 404 }
-    );
-
-  return Response.json(
-    { message: "Notification found", data: findedNotification },
-    { status: 200 }
-  );
+  return NextResponse.json(notifications);
 }
 
 export async function POST(request: NextRequest) {
@@ -44,8 +36,8 @@ export async function POST(request: NextRequest) {
   );
 }
 
-export async function PUT(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
+export async function PATCH(request: NextRequest) {
+  const uuid = request.nextUrl.searchParams.get("applicantId");
 
   const data: INotifications = await request.json();
 

@@ -86,16 +86,18 @@ model Jobs {
 }
 
 model Resumes {
-  id          String     @id @default(uuid())
-  applicant   Applicants @relation(fields: [applicantId], references: [id])
-  applicantId String
-  job         Jobs       @relation(fields: [jobId], references: [id])
-  jobId       String
-  resumeName  String
-  resumeUrl   String
-  submittedAt DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt()
+  id            String          @id @default(uuid())
+  applicant     Applicants      @relation(fields: [applicantId], references: [id])
+  applicantId   String
+  job           Jobs            @relation(fields: [jobId], references: [id])
+  jobId         String
+  resumeName    String
+  resumeUrl     String
+  submittedAt   DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt()
+  ApplicantJobs ApplicantJobs[]
 
+  @@unique([applicantId, jobId])
   @@map("resumes")
 }
 
@@ -108,6 +110,7 @@ model InterviewSchedules {
   scheduleDate DateTime
   scheduleTime DateTime
   location     String?
+  linkMeet     String?
   status       ScheduleStatus
   mode         InterviewMode
   createdAt    DateTime       @default(now())
@@ -124,6 +127,10 @@ model ApplicantJobs {
   jobId       String
   status      JobStatus
   appliedAt   DateTime   @default(now())
+
+  resume            Resumes? @relation(fields: [resumeApplicantId, resumeJobId], references: [applicantId, jobId])
+  resumeApplicantId String?
+  resumeJobId       String?
 
   @@map("applicant_jobs")
 }

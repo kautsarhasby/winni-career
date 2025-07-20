@@ -6,7 +6,7 @@ export interface IUsers {
   birthdate: Date;
   password: string; //Hashed Password
   isValidated: boolean;
-  otp?: Int;
+  otp?: number;
   role: Role;
 }
 
@@ -20,7 +20,7 @@ export interface IApplicants {
   gender: Gender;
   profileImgurl: string;
   about?: string;
-  otp?: Int;
+  otp?: number;
 }
 
 export interface IJobs {
@@ -39,18 +39,36 @@ export interface IResumes {
   applicantId: string;
   jobId: string;
   resumeName: string;
-  resumeUrl: sring;
+  resumeUrl: string;
 }
 
 export interface ISchedules {
   id: string;
   applicantId: string;
   jobId: string;
-  scheduleDate: date;
-  scheduleTime: date;
+  scheduleDate: Date;
+  scheduleTime: Date;
   location?: string;
+  linkMeet?: string;
   status: ScheduleStatus;
   mode: InterviewMode;
+}
+
+export interface IScheduleTable {
+  id: string;
+  scheduleDate: string;
+  scheduleTime: string;
+  location?: string;
+  linkMeet?: string;
+  mode: "ONLINE" | "OFFLINE";
+  status: "PENDING" | "CONFIRMED" | "CANCELLED";
+  applicant: {
+    fullname: string;
+    email: string;
+  };
+  job: {
+    position: string;
+  };
 }
 
 export interface IApplicantsJobs {
@@ -58,6 +76,12 @@ export interface IApplicantsJobs {
   applicantId: string;
   jobId: string;
   status: JobStatus;
+}
+
+export interface IApply extends IApplicantsJobs {
+  applicant: IApplicants;
+  job: IJobs;
+  resume: IResumes;
 }
 
 export interface INotifications {
@@ -89,19 +113,19 @@ enum EmploymentType {
   INTERNSHIP = "INTERNSHIP",
 }
 
-enum JobStatus {
+export enum JobStatus {
   PENDING = "PENDING",
   REVIEWED = "REVIEWED",
   REJECTED = "REJECTED",
   ACCEPTED = "ACCEPTED",
 }
 
-enum InterviewMode {
+export enum InterviewMode {
   OFFLINE = "OFFLINE",
   ONLINE = "ONLINE",
 }
 
-enum ScheduleStatus {
+export enum ScheduleStatus {
   CONFIRMED = "CONFIRMED",
   RESCHEDULED = "RESCHEDULED",
   CANCELED = "CANCELED",

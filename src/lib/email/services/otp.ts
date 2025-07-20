@@ -25,8 +25,6 @@ export async function sendOTPVerification({
     expiredAt: nextFiveMinutesDate,
   };
 
-  console.log(email);
-
   const otp = Number(payload.otp);
 
   await prisma.applicants.update({
@@ -49,10 +47,11 @@ export async function verifyOTP({ otp }: z.infer<typeof VerifyOTPSchema>) {
     return null;
   }
   const sessionPayload = payload as SessionPayload;
+  const numberOTP = Number(otp);
 
   const verifyingUser = await prisma.applicants.findFirst({
     where: {
-      otp,
+      otp: numberOTP,
       AND: {
         email: sessionPayload.email,
       },

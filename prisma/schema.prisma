@@ -13,6 +13,7 @@ datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
+  
 }
 
 model Users {
@@ -98,7 +99,10 @@ model Resumes {
   submittedAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 
+  @@unique([applicantId, jobId])
+
   @@map("resumes")
+  ApplicantJobs ApplicantJobs[]
 }
 
 model InterviewSchedules{
@@ -110,6 +114,7 @@ model InterviewSchedules{
   scheduleDate DateTime
   scheduleTime DateTime
   location String?
+  linkMeet String?
   status ScheduleStatus
   mode InterviewMode
   createdAt DateTime @default(now())
@@ -126,6 +131,10 @@ model ApplicantJobs {
   jobId String
   status JobStatus
   appliedAt DateTime @default(now())
+
+  resume Resumes?   @relation(fields: [resumeApplicantId, resumeJobId], references: [applicantId, jobId])
+  resumeApplicantId String?
+  resumeJobId String?
   
   @@map("applicant_jobs")
 }

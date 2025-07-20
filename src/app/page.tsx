@@ -24,19 +24,19 @@ export default function Main() {
   return (
     <main className="min-h-screen w-full relative">
       <Navbar />
-      <section className="h-[460px] w-full bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499] flex items-center justify-center relative">
-        <div className="absolute left-10 top-10 border-b-2 border-white w-[360px] pb-4">
+      <section className="h-[260px] md:h-[460px] w-full bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499] flex items-center justify-center relative">
+        <div className="absolute left-2 top-2 md:left-10 md:top-10 border-b-2 border-white w-auto md:w-[360px] pb-2">
           <span className="font-bold text-2xl ">Winni Career</span>
         </div>
-        <div className="w-1/3 text-center ">
-          <span className="font-bold text-6xl italic">
+        <div className="md:w-1/3 w-full text-center ">
+          <span className="font-bold text-2xl italic md:text-6xl">
             Jelajahi Potensi dirimu dan jadilah professional
           </span>
         </div>
       </section>
       <section className="flex flex-col items-center justify-center w-full">
-        <div className="w-full h-[200px] flex items-center justify-center gap-2 container">
-          <div className="relative ">
+        <div className="w-full py-8 flex flex-col md:flex-row flex-wrap items-center justify-center gap-4 md:gap-2 container px-4">
+          <div className="relative w-full md:w-auto">
             <Search
               className="absolute top-2.5 left-2"
               size={18}
@@ -45,16 +45,17 @@ export default function Main() {
             <Input
               placeholder="Cari Lowongan"
               name="position"
-              className="pl-8 w-[400px] !bg-neutral-300 !text-[#929292]"
+              className="pl-8 w-full md:w-[400px] !bg-neutral-300 !text-[#929292]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="relative w-full ">
+
+          <div className="relative w-full md:w-auto">
             <select
-              className="appearance-none  h-9  w-full bg-neutral-300 text-black font-semibold rounded-md px-4 py-2 text-center text-sm pr-10"
+              className="appearance-none h-9 w-full bg-neutral-300 text-black font-semibold rounded-md px-4 py-2 text-sm pr-10"
               name="jobLocType"
-              defaultValue={""}
+              defaultValue=""
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, jobLocType: e.target.value }))
               }
@@ -63,61 +64,59 @@ export default function Main() {
               <option value="wfo">WFO</option>
               <option value="wfh">WFH</option>
             </select>
-
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black pointer-events-none" />
           </div>
-          <div className="relative w-full ">
+
+          <div className="relative w-full md:w-auto">
             <select
-              className="appearance-none text-sm h-9 w-full bg-neutral-300 text-black font-semibold rounded-md px-4 py-2 text-center pr-10"
+              className="appearance-none text-sm h-9 w-full bg-neutral-300 text-black font-semibold rounded-md px-4 py-2 pr-10"
               name="empType"
-              defaultValue={""}
+              defaultValue=""
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, empType: e.target.value }))
               }
             >
-              <option value={""}>Semua Tipe Kerja</option>
+              <option value="">Semua Tipe Kerja</option>
               <option value="FULLTIME">Fulltime</option>
               <option value="INTERNSHIP">Internship</option>
             </select>
-
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black pointer-events-none  " />
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black pointer-events-none" />
           </div>
+
           <Button
-            className="bg-[#5271FF] text-white w-[150px] text-lg"
-            onSubmit={handleSearch}
+            className="bg-[#5271FF] text-white w-full md:w-[150px] text-lg"
+            onClick={handleSearch}
           >
             Cari
           </Button>
         </div>
-        <div className="border p-10   mb-20 border-white w-[98%] rounded-lg">
-          <div className="border-b border-white w-[240px]">
-            <h1>Lowongan yang tersedia</h1>
+
+        <div className="border p-4 md:p-10 mb-20 border-white w-[95%] rounded-lg">
+          <div className="border-b border-white mb-4">
+            <h1 className="text-lg md:text-xl font-semibold">
+              Lowongan yang tersedia
+            </h1>
           </div>
-          <div className="grid-cols-3 grid gap-6 p-12">
-            {isPending ? (
-              <>
-                <Skeleton className="w-auto h-60" />
-                <Skeleton className="w-auto h-60" />
-                <Skeleton className="w-auto h-60" />
-                <Skeleton className="w-auto h-60" />
-                <Skeleton className="w-auto h-60" />
-                <Skeleton className="w-auto h-60" />
-              </>
-            ) : (
-              (filteredData.length > 0 ? filteredData : paginatedData)?.map(
-                (job, i) => (
-                  <CardJobs
-                    key={job.id || i}
-                    {...job}
-                    role={session?.user.role}
-                  />
-                )
-              )
-            )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {isPending
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <Skeleton key={i} className="w-full h-60" />
+                ))
+              : (filteredData.length > 0 ? filteredData : paginatedData)?.map(
+                  (job, i) => (
+                    <CardJobs
+                      key={job.id || i}
+                      {...job}
+                      role={session?.user.role}
+                    />
+                  )
+                )}
           </div>
-          <div className="flex justify-center gap-2 mt-6">
+
+          <div className="flex justify-center gap-2 mt-6 flex-wrap">
             <Button
-              variant={"ghost"}
+              variant="ghost"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
               className="px-3 py-1 border rounded disabled:opacity-50"
@@ -126,7 +125,7 @@ export default function Main() {
             </Button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <Button
-                variant={"ghost"}
+                variant="ghost"
                 key={page}
                 onClick={() => setCurrentPage(page)}
                 className={
@@ -137,7 +136,7 @@ export default function Main() {
               </Button>
             ))}
             <Button
-              variant={"ghost"}
+              variant="ghost"
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }

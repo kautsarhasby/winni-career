@@ -21,7 +21,7 @@ const RichTextEditor = dynamic(
   { ssr: false }
 );
 
-export default function DashboardHR() {
+export default function AddJobsPage() {
   const { data: session } = useSession();
 
   const [qualification, setQualification] = useState<string>("");

@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const data: IResumes = await request.json();
-
+  console.log(data);
   await prisma.$transaction([
     prisma.resumes.create({
       data,
@@ -46,7 +46,6 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   const uuid = request.nextUrl.searchParams.get("uuid");
-
   const data: IResumes = await request.json();
 
   if (!uuid)

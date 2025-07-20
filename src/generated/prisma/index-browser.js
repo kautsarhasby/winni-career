@@ -178,6 +178,7 @@ exports.Prisma.InterviewSchedulesScalarFieldEnum = {
   scheduleDate: 'scheduleDate',
   scheduleTime: 'scheduleTime',
   location: 'location',
+  linkMeet: 'linkMeet',
   status: 'status',
   mode: 'mode',
   createdAt: 'createdAt',
@@ -189,7 +190,9 @@ exports.Prisma.ApplicantJobsScalarFieldEnum = {
   applicantId: 'applicantId',
   jobId: 'jobId',
   status: 'status',
-  appliedAt: 'appliedAt'
+  appliedAt: 'appliedAt',
+  resumeApplicantId: 'resumeApplicantId',
+  resumeJobId: 'resumeJobId'
 };
 
 exports.Prisma.PasswordResetTokenScalarFieldEnum = {

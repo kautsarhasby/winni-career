@@ -2,16 +2,30 @@
 import Navbar from "@/components/public/navbar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CardHeader, Card, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  CardHeader,
+  Card,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
+import { useSingleApply } from "@/hooks/useSingleApply";
+import { useSingleSchedule } from "@/hooks/useSingleSchedule";
 import { Clock, EllipsisVertical, UserCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
-import React from "react";
 
 export default function ProfilPage() {
   const { data: session } = useSession();
+  const { data: apply, isPending: pendingApply } = useSingleApply(
+    session?.user.id ?? ""
+  );
+  const { data: schedule, isPending: pendingSchedule } = useSingleSchedule(
+    session?.user.id ?? ""
+  );
   return (
     <main className="w-full flex flex-col ">
       <Navbar />
@@ -22,21 +36,58 @@ export default function ProfilPage() {
               <CardTitle>Pekerjaan yang dilamar</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex justify-between items-center gap-3">
-                <Label>Fullstack Developer</Label>
-                <div className="flex items-center">
-                  <Badge
-                    variant={"outline"}
-                    className="bg-[#40421C] border-[#E1F00D] text-[#E1F00D]"
-                  >
-                    <Clock />
-                    Pending
-                  </Badge>
-                  <Button variant={"ghost"} className="cursor-pointer">
-                    <EllipsisVertical />
-                  </Button>
-                </div>
-              </div>
+              {pendingApply ? (
+                <Skeleton />
+              ) : (
+                apply?.map((job_apply, i) => {
+                  const status = job_apply.status;
+                  let badgeClass = "";
+                  let text = "";
+
+                  switch (status) {
+                    case "PENDING":
+                      badgeClass =
+                        "bg-yellow-100 border-yellow-400 text-yellow-800";
+                      text = "Pending";
+                      break;
+                    case "REVIEWED":
+                      badgeClass = "bg-blue-100 border-blue-400 text-blue-800";
+                      text = "Reviewed";
+                      break;
+                    case "ACCEPTED":
+                      badgeClass =
+                        "bg-green-100 border-green-400 text-green-800";
+                      text = "Accepted";
+                      break;
+                    case "REJECTED":
+                      badgeClass = "bg-red-100 border-red-400 text-red-800";
+                      text = "Rejected";
+                      break;
+                    default:
+                      badgeClass = "bg-gray-100 border-gray-400 text-gray-800";
+                      text = status;
+                  }
+
+                  return (
+                    <div
+                      key={i}
+                      className="flex justify-between items-center gap-3 mb-2"
+                    >
+                      <Label>{job_apply?.job.position}</Label>
+
+                      <div className="flex items-center gap-2">
+                        <Badge variant={"outline"} className={badgeClass}>
+                          <Clock className="w-4 h-4 mr-1" />
+                          {text}
+                        </Badge>
+                        <Button variant={"ghost"} className="cursor-pointer">
+                          <EllipsisVertical />
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </CardContent>
           </Card>
         </div>
@@ -94,6 +145,67 @@ export default function ProfilPage() {
               </div>
             </form>
           </div>
+        </div>
+        <div className="container p-10 flex items-center h-full  justify-center">
+          <Card className="w-full h-72">
+            <CardHeader className="">
+              <CardTitle>Tanggal Interview Dan Tempat</CardTitle>
+              <CardDescription>
+                Silahkan cek email anda untuk link meeting atau info lebih
+                lanjutnya
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {pendingSchedule ? (
+                <Skeleton />
+              ) : (
+                schedule?.map((schedule_apply, i) => {
+                  const date = new Date(schedule_apply.scheduleDate);
+                  const time = new Date(schedule_apply.scheduleTime);
+
+                  const hari = date.toLocaleDateString("id-ID", {
+                    weekday: "long",
+                  });
+                  const tanggal = date.toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
+                  const jam = time.toLocaleTimeString("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
+
+                  const labels = [
+                    { label: "Hari", value: hari },
+                    { label: "Tanggal", value: tanggal },
+                    { label: "Jam", value: jam },
+                    { label: "Lokasi", value: schedule_apply.location || "-" },
+                    { label: "Mode", value: schedule_apply.mode },
+                    { label: "Status", value: schedule_apply.status },
+                  ];
+                  return (
+                    <div
+                      key={i}
+                      className="flex justify-between bg-muted p-2 rounded-xl"
+                    >
+                      {labels.map((item) => (
+                        <div
+                          key={item.label}
+                          className="flex flex-col justify-between"
+                        >
+                          <span className="text-muted-foreground">
+                            {item.label}
+                          </span>
+                          <span className="font-medium">{item.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })
+              )}
+            </CardContent>
+          </Card>
         </div>
       </section>
     </main>

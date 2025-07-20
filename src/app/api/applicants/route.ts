@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma-client";
-import { IApplicants } from "../../../../types";
+import { IApplicants } from "@/types";
+import bcrypt from "bcryptjs";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -55,6 +56,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
+  type IApplicantsPicked = Pick<
+    IApplicants,
+    "email" | "birthdate" | "fullname" | "gender"
+  > &
+    Partial<Pick<IApplicants, "password">>;
   const uuid = request.nextUrl.searchParams.get("uuid");
 
   const data: IApplicants = await request.json();
@@ -65,16 +71,22 @@ export async function PUT(request: NextRequest) {
       { status: 404 }
     );
 
+  const updatePayload: IApplicantsPicked = {
+    email: data.email,
+    birthdate: data.birthdate,
+    fullname: data.fullname,
+    gender: data.gender,
+  };
+
+  if (data.password && data.password.trim() !== "") {
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    updatePayload.password = hashedPassword;
+  }
+  console.log(updatePayload);
   const updateData = await prisma.$transaction([
     prisma.applicants.update({
       where: { id: uuid },
-      data: {
-        email: data.email,
-        birthdate: data.birthdate,
-        fullname: data.fullname,
-        password: data.password,
-        gender: data.gender,
-      },
+      data: updatePayload,
     }),
   ]);
 

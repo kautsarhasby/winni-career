@@ -1,16 +1,23 @@
 import { prisma } from "@/lib/prisma-client";
-import { IUsers } from "../../../../types";
+import { IUsers } from "@/types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const role = request.nextUrl.searchParams.get("role")?.toString() || "";
-
-  if (role === "admin") {
+  const uuid = request.nextUrl.searchParams.get("uuid");
+  if (role === "ADMIN") {
     const admin = await prisma.users.findMany({ where: { role: "ADMIN" } });
 
     return Response.json({ message: "Admin found", data: admin });
-  } else if (role === "hr") {
-    const hr = await prisma.users.findMany({ where: { role: "HR" } });
+  } else if (role === "HR") {
+    let hr;
+    if (uuid) {
+      hr = await prisma.users.findFirst({
+        where: { role: "HR", AND: { id: uuid } },
+      });
+    } else {
+      hr = await prisma.users.findMany({ where: { role: "HR" } });
+    }
 
     return Response.json({ message: "Hr found", data: hr });
   }
@@ -52,14 +59,14 @@ export async function PUT(request: NextRequest) {
       { message: "UUID not found, please check again" },
       { status: 404 }
     );
-
+  const birthdate = new Date(data.birthdate);
   const updateData = await prisma.$transaction([
     prisma.users.update({
       where: { id: uuid },
       data: {
         email: data.email,
         username: data.username,
-        birthdate: data.birthdate,
+        birthdate,
         fullname: data.fullname,
         password: data.password,
         role: data.role,

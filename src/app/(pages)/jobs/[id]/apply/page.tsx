@@ -10,33 +10,52 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import React, { FormEvent, useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { uploadPdf } from "@/lib/supabase/upload";
 import FooterInput from "@/components/public/footer-input";
-import { useParams } from "next/navigation";
-import { IJobs } from "../../../../../../types";
+import { useParams, useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSession } from "next-auth/react";
+import { useSingleJob } from "@/hooks/useSingleJob";
 
-export default function JobbApplyPage() {
+export default function JobApplyPage() {
   const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
   const params = useParams();
-  const id = params.id;
-
-  const { data, isPending: pendingQuery } = useQuery({
-    queryKey: ["job", id],
-    queryFn: async () => {
-      const res = await fetch(`/api/jobs?uuid=${id}`);
-      const data = await res.json();
-      console.log(data);
-      const jobs: IJobs = data.data;
-      return jobs;
-    },
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
-  });
+  const { data: session } = useSession();
+  const applicantId = session?.user.id;
+  const jobId = params.id as string;
+  const { data, isPending: pendingQuery } = useSingleJob(jobId);
 
   const { mutate, isPending, isSuccess, isError } = useMutation({
-    mutationFn: (file: File) => uploadPdf(file, "user123"),
+    mutationFn: async (file: File) => {
+      if (!applicantId) throw new Error("id not found");
+      const uploaded = uploadPdf(file, applicantId);
+      if ((await uploaded).fullPath) {
+        await fetch("/api/resumes", {
+          method: "POST",
+          body: JSON.stringify({
+            applicantId,
+            jobId,
+            resumeName: `CV-${session?.user.fullname}`,
+            resumeUrl: (await uploaded).fullPath,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        await fetch("/api/applicants_jobs", {
+          method: "POST",
+          body: JSON.stringify({
+            applicantId,
+            jobId,
+            resumeApplicantId: applicantId,
+            resumeJobId: jobId,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    },
+    onSuccess: () => router.push(`/jobs/${jobId}/status`),
   });
 
   const handleUpload = (e: FormEvent<HTMLFormElement>) => {
@@ -46,12 +65,15 @@ export default function JobbApplyPage() {
       mutate(file);
     }
   };
+
   return (
-    <main className="h-screen w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
-      <section className=" w-[550px] h-full flex items-center">
-        <Card className="w-full">
+    <main className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
+      <section className="w-full max-w-[550px] h-full md:h-auto flex items-center justify-center">
+        <Card className="w-full rounded-none md:rounded-2xl">
           <CardHeader>
-            <CardTitle>Form Pendaftaran</CardTitle>
+            <CardTitle className="text-base sm:text-lg md:text-xl">
+              Form Pendaftaran
+            </CardTitle>
             <CardDescription>
               Selamat datang di Form Pendaftaran
             </CardDescription>
@@ -63,7 +85,7 @@ export default function JobbApplyPage() {
             <form action="" method="POST" onSubmit={handleUpload}>
               <div className="mb-3 flex flex-col gap-3">
                 <Label>
-                  Posisi yang dilamar :{" "}
+                  Posisi yang dilamar:{" "}
                   <strong>
                     {data?.position ? (
                       data.position
@@ -73,7 +95,7 @@ export default function JobbApplyPage() {
                   </strong>
                 </Label>
                 <Label>
-                  Jenis Kontrak :{" "}
+                  Jenis Kontrak:{" "}
                   <strong>
                     {data?.empType ? (
                       data.empType
@@ -83,7 +105,7 @@ export default function JobbApplyPage() {
                   </strong>
                 </Label>
                 <Label>
-                  Sistem Kerja :{" "}
+                  Sistem Kerja:{" "}
                   <strong>
                     {data?.jobLocType ? (
                       data.jobLocType
@@ -93,11 +115,17 @@ export default function JobbApplyPage() {
                   </strong>
                 </Label>
               </div>
+
               <div className="mb-3">
                 <Label htmlFor="fullname" className="mb-2">
                   Fullname
                 </Label>
-                <Input id="fullname" name="fullname" placeholder="Fullname" />
+                <Input
+                  id="fullname"
+                  name="fullname"
+                  placeholder="Fullname"
+                  className="w-full"
+                />
               </div>
 
               <div className="mb-3">
@@ -107,7 +135,7 @@ export default function JobbApplyPage() {
                 <Input
                   type="file"
                   id="CV"
-                  className="cursor-pointer"
+                  className="cursor-pointer w-full"
                   accept="application/pdf"
                   onChange={(e) => {
                     setFile(e.target.files?.[0] || null);
@@ -116,14 +144,20 @@ export default function JobbApplyPage() {
                 />
               </div>
 
-              <div className="w-full flex justify-end">
-                <Button type="submit" disabled={isPending || pendingQuery}>
+              <div className="w-full flex justify-end flex-wrap gap-2">
+                <Button
+                  type="submit"
+                  disabled={isPending || pendingQuery}
+                  className="cursor-pointer"
+                >
                   {isPending ? "Loading" : "Submit"}
                 </Button>
                 {isSuccess && (
-                  <p className="text-green-600">Berhasil submit!</p>
+                  <p className="text-green-600 text-sm">Berhasil submit!</p>
                 )}
-                {isError && <p className="text-red-600">Gagal submit!</p>}
+                {isError && (
+                  <p className="text-red-600 text-sm">Gagal submit!</p>
+                )}
               </div>
             </form>
           </CardContent>

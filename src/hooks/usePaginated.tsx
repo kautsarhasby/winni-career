@@ -1,19 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { IJobs } from "../../types";
+import { useJobs } from "./useJobs";
 
 export const usePaginated = () => {
   const itemPerPages = 6;
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { data, isPending } = useQuery({
-    queryKey: ["jobs"],
-    queryFn: async () => {
-      const res = await fetch("/api/jobs");
-      const data = await res.json();
-      const jobs: IJobs[] = data.data;
-      return jobs;
-    },
-  });
+  const { data, isPending } = useJobs();
   const totalPages = Math.ceil((data?.length || 0) / itemPerPages);
   const paginatedData = data?.slice(
     (currentPage - 1) * itemPerPages,

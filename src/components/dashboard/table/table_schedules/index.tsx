@@ -7,13 +7,8 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
   useReactTable,
-  VisibilityState,
 } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -22,62 +17,98 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IApplicants } from "../../../../types";
+import { IScheduleTable } from "@/types";
+import ScheduleCell from "../schedule_status_cell";
+import { Button } from "@/components/ui/button";
 
-export const columns: ColumnDef<IApplicants>[] = [
+interface Props {
+  data: IScheduleTable[];
+  search: string;
+}
+
+const columns: ColumnDef<IScheduleTable>[] = [
   {
-    accessorKey: "username",
-    header: "Username",
+    accessorKey: "applicant.fullname",
+    header: "Fullname ",
+    cell: ({ row }) => row.original.applicant.fullname,
+    id: "fullname",
+    enableColumnFilter: true,
   },
   {
-    accessorKey: "fullname",
-    header: "Fullname",
+    accessorKey: "job.position",
+    header: "Position",
+    cell: ({ row }) => row.original.job.position,
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "scheduleDate",
+    header: "Date",
+    cell: ({ row }) =>
+      new Date(row.original.scheduleDate).toLocaleDateString("id-ID"),
   },
   {
-    accessorKey: "birthdate",
-    header: "Birth Date",
+    accessorKey: "scheduleTime",
+    header: "Time",
+    cell: ({ row }) =>
+      new Date(row.original.scheduleTime).toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "location",
+    header: "Location",
+  },
+  {
+    accessorKey: "mode",
+    header: "Mode",
+  },
+  {
+    accessorKey: "linkMeet",
+    header: "Link Meeting",
+    cell: ({ row }) => {
+      const url = row.getValue("linkMeet") as string;
+
+      return (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 underline block max-w-[200px] truncate"
+        >
+          {url}
+        </a>
+      );
+    },
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      return <ScheduleCell scheduleId={row.original.id} />;
+    },
   },
 ];
 
-export function DataTableDemo(data: IApplicants[]) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+export function SchedulesTable({ data, search }: Props) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
-
   const table = useReactTable({
-    columns,
     data,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    onColumnFiltersChange: setColumnFilters,
     state: {
-      sorting,
       columnFilters,
-      columnVisibility,
-      rowSelection,
     },
   });
+  React.useEffect(() => {
+    table.getColumn("fullname")?.setFilterValue(search);
+  }, [search, table]);
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4"></div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -129,10 +160,6 @@ export function DataTableDemo(data: IApplicants[]) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"

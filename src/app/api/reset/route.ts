@@ -1,6 +1,8 @@
 "use server";
 import { sendResetEmail } from "@/lib/email/services/send-email";
 import { prisma } from "@/lib/prisma-client";
+import { IApplicants } from "@/types";
+import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,7 +14,7 @@ export async function GET(req: NextRequest) {
   const applicantToken = await prisma.passwordResetToken.findFirst({
     where: { token },
   });
-
+  console.log(applicantToken);
   if (applicantToken) {
     if (applicantToken.expiresAt.getTime() > dateTime.getTime())
       return NextResponse.json(
@@ -20,7 +22,10 @@ export async function GET(req: NextRequest) {
         { status: 440 }
       );
 
-    return NextResponse.json({ data: token, success: true }, { status: 200 });
+    return NextResponse.json(
+      { data: applicantToken.applicantId, success: true },
+      { status: 200 }
+    );
   }
 
   return NextResponse.json(
@@ -61,6 +66,33 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(
     { message: "Sukses mengirim email" },
+    { status: 200 }
+  );
+}
+
+export async function PUT(request: NextRequest) {
+  const uuid = request.nextUrl.searchParams.get("uuid");
+
+  const data = await request.json();
+  if (!uuid)
+    return Response.json(
+      { message: "UUID not found, please check again" },
+      { status: 404 }
+    );
+
+  const hashedPassword = await bcrypt.hash(data, 10);
+
+  const updateData = await prisma.$transaction([
+    prisma.applicants.update({
+      where: { id: uuid },
+      data: {
+        password: hashedPassword,
+      },
+    }),
+  ]);
+
+  return Response.json(
+    { message: "Success Updated applicant", data: updateData },
     { status: 200 }
   );
 }

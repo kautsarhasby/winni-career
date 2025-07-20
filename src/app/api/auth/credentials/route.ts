@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma-client";
+import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ICredentials {
@@ -13,17 +14,20 @@ export async function POST(req: NextRequest) {
   const { email, password }: ICredentials = await req.json();
 
   const user = await prisma.users.findFirst({
-    where: { email, AND: { password } },
+    where: { email },
   });
   const applicant = await prisma.applicants.findFirst({
-    where: { email, AND: { password } },
+    where: { email },
   });
 
-  if (user) {
+  console.log(user);
+  if (user && (await bcrypt.compare(password, user.password))) {
     return NextResponse.json(user);
-  } else if (applicant) {
-    return NextResponse.json(applicant);
-  } else {
-    return NextResponse.error();
   }
+
+  if (applicant && (await bcrypt.compare(password, applicant.password))) {
+    return NextResponse.json(applicant);
+  }
+
+  return new NextResponse("Email atau Password salah", { status: 401 });
 }

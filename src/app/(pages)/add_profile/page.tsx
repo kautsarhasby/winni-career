@@ -50,7 +50,6 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    console.log(session);
     if (session?.user.name && session.user.email) {
       setFullname(session.user.name);
       setEmail(session.user.email);
@@ -62,17 +61,27 @@ export default function ProfilePage() {
       <section className="w-1/4">
         <Card>
           <CardHeader>
-            <CardTitle>Complete Your Profile</CardTitle>
+            <CardTitle>Lengkapi Profilemu</CardTitle>
             <CardDescription>
-              Before we continue, it seems you logged in using Google Account.
+              Sebelum melanjutkan, sepertinya kamu menggunakan akun Google
             </CardDescription>
             <CardDescription>
-              Please fill this form and make sure you profile is right
+              Harap mengisi formulir berikut dan pastikan bahwa nama anda benar
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form action="" onSubmit={handleSubmit}>
               <div className="mb-3">
+                <Label htmlFor="email" className="mb-2">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  placeholder="EMail"
+                  value={email}
+                  disabled
+                />
                 <Label htmlFor="fullname" className="mb-2">
                   Fullname
                 </Label>

@@ -1,32 +1,62 @@
 import { prisma } from "@/lib/prisma-client";
-import { ISchedules } from "../../../../types";
+import { ISchedules } from "@/types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
+  const jobId = request.nextUrl.searchParams.get("jobId");
+  const applicantId = request.nextUrl.searchParams.get("applicantId");
 
-  if (!uuid) {
-    const schedules = await prisma.interviewSchedules.findMany();
+  if (applicantId && !jobId) {
+    const schedules = await prisma.interviewSchedules.findMany({
+      where: { applicantId },
+      include: {
+        applicant: true,
+        job: true,
+      },
+    });
 
     return Response.json({
-      message: "Success retrieved all data",
+      message: "Success retrieved jobs for applicant",
       data: schedules,
     });
   }
-  const findedSchedule = await prisma.interviewSchedules.findFirst({
-    where: { id: uuid },
+
+  if (applicantId && jobId) {
+    const findedschedules = await prisma.interviewSchedules.findFirst({
+      where: {
+        jobId,
+        applicantId,
+      },
+      include: {
+        applicant: true,
+        job: true,
+      },
+    });
+
+    if (!findedschedules) {
+      return Response.json(
+        { message: "UUID not found, please check again" },
+        { status: 404 }
+      );
+    }
+
+    return Response.json(
+      { message: "Applicant jobs found", data: findedschedules },
+      { status: 200 }
+    );
+  }
+
+  const allSchedules = await prisma.interviewSchedules.findMany({
+    include: {
+      applicant: true,
+      job: true,
+    },
   });
 
-  if (!findedSchedule)
-    return Response.json(
-      { message: "UUID not found, please check again" },
-      { status: 404 }
-    );
-
-  return Response.json(
-    { message: "Schedule found", data: findedSchedule },
-    { status: 200 }
-  );
+  return Response.json({
+    message: "Success retrieved all data",
+    data: allSchedules,
+  });
 }
 
 export async function POST(request: NextRequest) {

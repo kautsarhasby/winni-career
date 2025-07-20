@@ -1763,6 +1763,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ResumesCountOutputType
+   */
+
+  export type ResumesCountOutputType = {
+    ApplicantJobs: number
+  }
+
+  export type ResumesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ApplicantJobs?: boolean | ResumesCountOutputTypeCountApplicantJobsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ResumesCountOutputType without action
+   */
+  export type ResumesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumesCountOutputType
+     */
+    select?: ResumesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ResumesCountOutputType without action
+   */
+  export type ResumesCountOutputTypeCountApplicantJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApplicantJobsWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -5666,6 +5697,8 @@ export namespace Prisma {
     updatedAt?: boolean
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    ApplicantJobs?: boolean | Resumes$ApplicantJobsArgs<ExtArgs>
+    _count?: boolean | ResumesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resumes"]>
 
   export type ResumesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5706,6 +5739,8 @@ export namespace Prisma {
   export type ResumesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    ApplicantJobs?: boolean | Resumes$ApplicantJobsArgs<ExtArgs>
+    _count?: boolean | ResumesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ResumesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
@@ -5721,6 +5756,7 @@ export namespace Prisma {
     objects: {
       applicant: Prisma.$ApplicantsPayload<ExtArgs>
       job: Prisma.$JobsPayload<ExtArgs>
+      ApplicantJobs: Prisma.$ApplicantJobsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6126,6 +6162,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     applicant<T extends ApplicantsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApplicantsDefaultArgs<ExtArgs>>): Prisma__ApplicantsClient<$Result.GetResult<Prisma.$ApplicantsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     job<T extends JobsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JobsDefaultArgs<ExtArgs>>): Prisma__JobsClient<$Result.GetResult<Prisma.$JobsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ApplicantJobs<T extends Resumes$ApplicantJobsArgs<ExtArgs> = {}>(args?: Subset<T, Resumes$ApplicantJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicantJobsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6558,6 +6595,30 @@ export namespace Prisma {
   }
 
   /**
+   * Resumes.ApplicantJobs
+   */
+  export type Resumes$ApplicantJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ApplicantJobs
+     */
+    select?: ApplicantJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ApplicantJobs
+     */
+    omit?: ApplicantJobsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicantJobsInclude<ExtArgs> | null
+    where?: ApplicantJobsWhereInput
+    orderBy?: ApplicantJobsOrderByWithRelationInput | ApplicantJobsOrderByWithRelationInput[]
+    cursor?: ApplicantJobsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApplicantJobsScalarFieldEnum | ApplicantJobsScalarFieldEnum[]
+  }
+
+  /**
    * Resumes without action
    */
   export type ResumesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6593,6 +6654,7 @@ export namespace Prisma {
     scheduleDate: Date | null
     scheduleTime: Date | null
     location: string | null
+    linkMeet: string | null
     status: $Enums.ScheduleStatus | null
     mode: $Enums.InterviewMode | null
     createdAt: Date | null
@@ -6606,6 +6668,7 @@ export namespace Prisma {
     scheduleDate: Date | null
     scheduleTime: Date | null
     location: string | null
+    linkMeet: string | null
     status: $Enums.ScheduleStatus | null
     mode: $Enums.InterviewMode | null
     createdAt: Date | null
@@ -6619,6 +6682,7 @@ export namespace Prisma {
     scheduleDate: number
     scheduleTime: number
     location: number
+    linkMeet: number
     status: number
     mode: number
     createdAt: number
@@ -6634,6 +6698,7 @@ export namespace Prisma {
     scheduleDate?: true
     scheduleTime?: true
     location?: true
+    linkMeet?: true
     status?: true
     mode?: true
     createdAt?: true
@@ -6647,6 +6712,7 @@ export namespace Prisma {
     scheduleDate?: true
     scheduleTime?: true
     location?: true
+    linkMeet?: true
     status?: true
     mode?: true
     createdAt?: true
@@ -6660,6 +6726,7 @@ export namespace Prisma {
     scheduleDate?: true
     scheduleTime?: true
     location?: true
+    linkMeet?: true
     status?: true
     mode?: true
     createdAt?: true
@@ -6746,6 +6813,7 @@ export namespace Prisma {
     scheduleDate: Date
     scheduleTime: Date
     location: string | null
+    linkMeet: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt: Date
@@ -6776,6 +6844,7 @@ export namespace Prisma {
     scheduleDate?: boolean
     scheduleTime?: boolean
     location?: boolean
+    linkMeet?: boolean
     status?: boolean
     mode?: boolean
     createdAt?: boolean
@@ -6791,6 +6860,7 @@ export namespace Prisma {
     scheduleDate?: boolean
     scheduleTime?: boolean
     location?: boolean
+    linkMeet?: boolean
     status?: boolean
     mode?: boolean
     createdAt?: boolean
@@ -6806,6 +6876,7 @@ export namespace Prisma {
     scheduleDate?: boolean
     scheduleTime?: boolean
     location?: boolean
+    linkMeet?: boolean
     status?: boolean
     mode?: boolean
     createdAt?: boolean
@@ -6821,13 +6892,14 @@ export namespace Prisma {
     scheduleDate?: boolean
     scheduleTime?: boolean
     location?: boolean
+    linkMeet?: boolean
     status?: boolean
     mode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InterviewSchedulesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "applicantId" | "jobId" | "scheduleDate" | "scheduleTime" | "location" | "status" | "mode" | "createdAt" | "updatedAt", ExtArgs["result"]["interviewSchedules"]>
+  export type InterviewSchedulesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "applicantId" | "jobId" | "scheduleDate" | "scheduleTime" | "location" | "linkMeet" | "status" | "mode" | "createdAt" | "updatedAt", ExtArgs["result"]["interviewSchedules"]>
   export type InterviewSchedulesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
@@ -6854,6 +6926,7 @@ export namespace Prisma {
       scheduleDate: Date
       scheduleTime: Date
       location: string | null
+      linkMeet: string | null
       status: $Enums.ScheduleStatus
       mode: $Enums.InterviewMode
       createdAt: Date
@@ -7289,6 +7362,7 @@ export namespace Prisma {
     readonly scheduleDate: FieldRef<"InterviewSchedules", 'DateTime'>
     readonly scheduleTime: FieldRef<"InterviewSchedules", 'DateTime'>
     readonly location: FieldRef<"InterviewSchedules", 'String'>
+    readonly linkMeet: FieldRef<"InterviewSchedules", 'String'>
     readonly status: FieldRef<"InterviewSchedules", 'ScheduleStatus'>
     readonly mode: FieldRef<"InterviewSchedules", 'InterviewMode'>
     readonly createdAt: FieldRef<"InterviewSchedules", 'DateTime'>
@@ -7723,6 +7797,8 @@ export namespace Prisma {
     jobId: string | null
     status: $Enums.JobStatus | null
     appliedAt: Date | null
+    resumeApplicantId: string | null
+    resumeJobId: string | null
   }
 
   export type ApplicantJobsMaxAggregateOutputType = {
@@ -7731,6 +7807,8 @@ export namespace Prisma {
     jobId: string | null
     status: $Enums.JobStatus | null
     appliedAt: Date | null
+    resumeApplicantId: string | null
+    resumeJobId: string | null
   }
 
   export type ApplicantJobsCountAggregateOutputType = {
@@ -7739,6 +7817,8 @@ export namespace Prisma {
     jobId: number
     status: number
     appliedAt: number
+    resumeApplicantId: number
+    resumeJobId: number
     _all: number
   }
 
@@ -7749,6 +7829,8 @@ export namespace Prisma {
     jobId?: true
     status?: true
     appliedAt?: true
+    resumeApplicantId?: true
+    resumeJobId?: true
   }
 
   export type ApplicantJobsMaxAggregateInputType = {
@@ -7757,6 +7839,8 @@ export namespace Prisma {
     jobId?: true
     status?: true
     appliedAt?: true
+    resumeApplicantId?: true
+    resumeJobId?: true
   }
 
   export type ApplicantJobsCountAggregateInputType = {
@@ -7765,6 +7849,8 @@ export namespace Prisma {
     jobId?: true
     status?: true
     appliedAt?: true
+    resumeApplicantId?: true
+    resumeJobId?: true
     _all?: true
   }
 
@@ -7846,6 +7932,8 @@ export namespace Prisma {
     jobId: string
     status: $Enums.JobStatus
     appliedAt: Date
+    resumeApplicantId: string | null
+    resumeJobId: string | null
     _count: ApplicantJobsCountAggregateOutputType | null
     _min: ApplicantJobsMinAggregateOutputType | null
     _max: ApplicantJobsMaxAggregateOutputType | null
@@ -7871,8 +7959,11 @@ export namespace Prisma {
     jobId?: boolean
     status?: boolean
     appliedAt?: boolean
+    resumeApplicantId?: boolean
+    resumeJobId?: boolean
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }, ExtArgs["result"]["applicantJobs"]>
 
   export type ApplicantJobsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7881,8 +7972,11 @@ export namespace Prisma {
     jobId?: boolean
     status?: boolean
     appliedAt?: boolean
+    resumeApplicantId?: boolean
+    resumeJobId?: boolean
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }, ExtArgs["result"]["applicantJobs"]>
 
   export type ApplicantJobsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7891,8 +7985,11 @@ export namespace Prisma {
     jobId?: boolean
     status?: boolean
     appliedAt?: boolean
+    resumeApplicantId?: boolean
+    resumeJobId?: boolean
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }, ExtArgs["result"]["applicantJobs"]>
 
   export type ApplicantJobsSelectScalar = {
@@ -7901,20 +7998,25 @@ export namespace Prisma {
     jobId?: boolean
     status?: boolean
     appliedAt?: boolean
+    resumeApplicantId?: boolean
+    resumeJobId?: boolean
   }
 
-  export type ApplicantJobsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "applicantId" | "jobId" | "status" | "appliedAt", ExtArgs["result"]["applicantJobs"]>
+  export type ApplicantJobsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "applicantId" | "jobId" | "status" | "appliedAt" | "resumeApplicantId" | "resumeJobId", ExtArgs["result"]["applicantJobs"]>
   export type ApplicantJobsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }
   export type ApplicantJobsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }
   export type ApplicantJobsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applicant?: boolean | ApplicantsDefaultArgs<ExtArgs>
     job?: boolean | JobsDefaultArgs<ExtArgs>
+    resume?: boolean | ApplicantJobs$resumeArgs<ExtArgs>
   }
 
   export type $ApplicantJobsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7922,6 +8024,7 @@ export namespace Prisma {
     objects: {
       applicant: Prisma.$ApplicantsPayload<ExtArgs>
       job: Prisma.$JobsPayload<ExtArgs>
+      resume: Prisma.$ResumesPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7929,6 +8032,8 @@ export namespace Prisma {
       jobId: string
       status: $Enums.JobStatus
       appliedAt: Date
+      resumeApplicantId: string | null
+      resumeJobId: string | null
     }, ExtArgs["result"]["applicantJobs"]>
     composites: {}
   }
@@ -8325,6 +8430,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     applicant<T extends ApplicantsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApplicantsDefaultArgs<ExtArgs>>): Prisma__ApplicantsClient<$Result.GetResult<Prisma.$ApplicantsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     job<T extends JobsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JobsDefaultArgs<ExtArgs>>): Prisma__JobsClient<$Result.GetResult<Prisma.$JobsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    resume<T extends ApplicantJobs$resumeArgs<ExtArgs> = {}>(args?: Subset<T, ApplicantJobs$resumeArgs<ExtArgs>>): Prisma__ResumesClient<$Result.GetResult<Prisma.$ResumesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8359,6 +8465,8 @@ export namespace Prisma {
     readonly jobId: FieldRef<"ApplicantJobs", 'String'>
     readonly status: FieldRef<"ApplicantJobs", 'JobStatus'>
     readonly appliedAt: FieldRef<"ApplicantJobs", 'DateTime'>
+    readonly resumeApplicantId: FieldRef<"ApplicantJobs", 'String'>
+    readonly resumeJobId: FieldRef<"ApplicantJobs", 'String'>
   }
     
 
@@ -8752,6 +8860,25 @@ export namespace Prisma {
      * Limit how many ApplicantJobs to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ApplicantJobs.resume
+   */
+  export type ApplicantJobs$resumeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resumes
+     */
+    select?: ResumesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resumes
+     */
+    omit?: ResumesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumesInclude<ExtArgs> | null
+    where?: ResumesWhereInput
   }
 
   /**
@@ -11048,6 +11175,7 @@ export namespace Prisma {
     scheduleDate: 'scheduleDate',
     scheduleTime: 'scheduleTime',
     location: 'location',
+    linkMeet: 'linkMeet',
     status: 'status',
     mode: 'mode',
     createdAt: 'createdAt',
@@ -11062,7 +11190,9 @@ export namespace Prisma {
     applicantId: 'applicantId',
     jobId: 'jobId',
     status: 'status',
-    appliedAt: 'appliedAt'
+    appliedAt: 'appliedAt',
+    resumeApplicantId: 'resumeApplicantId',
+    resumeJobId: 'resumeJobId'
   };
 
   export type ApplicantJobsScalarFieldEnum = (typeof ApplicantJobsScalarFieldEnum)[keyof typeof ApplicantJobsScalarFieldEnum]
@@ -11603,6 +11733,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resumes"> | Date | string
     applicant?: XOR<ApplicantsScalarRelationFilter, ApplicantsWhereInput>
     job?: XOR<JobsScalarRelationFilter, JobsWhereInput>
+    ApplicantJobs?: ApplicantJobsListRelationFilter
   }
 
   export type ResumesOrderByWithRelationInput = {
@@ -11615,10 +11746,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
     applicant?: ApplicantsOrderByWithRelationInput
     job?: JobsOrderByWithRelationInput
+    ApplicantJobs?: ApplicantJobsOrderByRelationAggregateInput
   }
 
   export type ResumesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    applicantId_jobId?: ResumesApplicantIdJobIdCompoundUniqueInput
     AND?: ResumesWhereInput | ResumesWhereInput[]
     OR?: ResumesWhereInput[]
     NOT?: ResumesWhereInput | ResumesWhereInput[]
@@ -11630,7 +11763,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resumes"> | Date | string
     applicant?: XOR<ApplicantsScalarRelationFilter, ApplicantsWhereInput>
     job?: XOR<JobsScalarRelationFilter, JobsWhereInput>
-  }, "id">
+    ApplicantJobs?: ApplicantJobsListRelationFilter
+  }, "id" | "applicantId_jobId">
 
   export type ResumesOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11668,6 +11802,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
     scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
+    linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFilter<"InterviewSchedules"> | $Enums.InterviewMode
     createdAt?: DateTimeFilter<"InterviewSchedules"> | Date | string
@@ -11683,6 +11818,7 @@ export namespace Prisma {
     scheduleDate?: SortOrder
     scheduleTime?: SortOrder
     location?: SortOrderInput | SortOrder
+    linkMeet?: SortOrderInput | SortOrder
     status?: SortOrder
     mode?: SortOrder
     createdAt?: SortOrder
@@ -11701,6 +11837,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
     scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
+    linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFilter<"InterviewSchedules"> | $Enums.InterviewMode
     createdAt?: DateTimeFilter<"InterviewSchedules"> | Date | string
@@ -11716,6 +11853,7 @@ export namespace Prisma {
     scheduleDate?: SortOrder
     scheduleTime?: SortOrder
     location?: SortOrderInput | SortOrder
+    linkMeet?: SortOrderInput | SortOrder
     status?: SortOrder
     mode?: SortOrder
     createdAt?: SortOrder
@@ -11735,6 +11873,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeWithAggregatesFilter<"InterviewSchedules"> | Date | string
     scheduleTime?: DateTimeWithAggregatesFilter<"InterviewSchedules"> | Date | string
     location?: StringNullableWithAggregatesFilter<"InterviewSchedules"> | string | null
+    linkMeet?: StringNullableWithAggregatesFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusWithAggregatesFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
     mode?: EnumInterviewModeWithAggregatesFilter<"InterviewSchedules"> | $Enums.InterviewMode
     createdAt?: DateTimeWithAggregatesFilter<"InterviewSchedules"> | Date | string
@@ -11750,8 +11889,11 @@ export namespace Prisma {
     jobId?: StringFilter<"ApplicantJobs"> | string
     status?: EnumJobStatusFilter<"ApplicantJobs"> | $Enums.JobStatus
     appliedAt?: DateTimeFilter<"ApplicantJobs"> | Date | string
+    resumeApplicantId?: StringNullableFilter<"ApplicantJobs"> | string | null
+    resumeJobId?: StringNullableFilter<"ApplicantJobs"> | string | null
     applicant?: XOR<ApplicantsScalarRelationFilter, ApplicantsWhereInput>
     job?: XOR<JobsScalarRelationFilter, JobsWhereInput>
+    resume?: XOR<ResumesNullableScalarRelationFilter, ResumesWhereInput> | null
   }
 
   export type ApplicantJobsOrderByWithRelationInput = {
@@ -11760,8 +11902,11 @@ export namespace Prisma {
     jobId?: SortOrder
     status?: SortOrder
     appliedAt?: SortOrder
+    resumeApplicantId?: SortOrderInput | SortOrder
+    resumeJobId?: SortOrderInput | SortOrder
     applicant?: ApplicantsOrderByWithRelationInput
     job?: JobsOrderByWithRelationInput
+    resume?: ResumesOrderByWithRelationInput
   }
 
   export type ApplicantJobsWhereUniqueInput = Prisma.AtLeast<{
@@ -11773,8 +11918,11 @@ export namespace Prisma {
     jobId?: StringFilter<"ApplicantJobs"> | string
     status?: EnumJobStatusFilter<"ApplicantJobs"> | $Enums.JobStatus
     appliedAt?: DateTimeFilter<"ApplicantJobs"> | Date | string
+    resumeApplicantId?: StringNullableFilter<"ApplicantJobs"> | string | null
+    resumeJobId?: StringNullableFilter<"ApplicantJobs"> | string | null
     applicant?: XOR<ApplicantsScalarRelationFilter, ApplicantsWhereInput>
     job?: XOR<JobsScalarRelationFilter, JobsWhereInput>
+    resume?: XOR<ResumesNullableScalarRelationFilter, ResumesWhereInput> | null
   }, "id">
 
   export type ApplicantJobsOrderByWithAggregationInput = {
@@ -11783,6 +11931,8 @@ export namespace Prisma {
     jobId?: SortOrder
     status?: SortOrder
     appliedAt?: SortOrder
+    resumeApplicantId?: SortOrderInput | SortOrder
+    resumeJobId?: SortOrderInput | SortOrder
     _count?: ApplicantJobsCountOrderByAggregateInput
     _max?: ApplicantJobsMaxOrderByAggregateInput
     _min?: ApplicantJobsMinOrderByAggregateInput
@@ -11797,6 +11947,8 @@ export namespace Prisma {
     jobId?: StringWithAggregatesFilter<"ApplicantJobs"> | string
     status?: EnumJobStatusWithAggregatesFilter<"ApplicantJobs"> | $Enums.JobStatus
     appliedAt?: DateTimeWithAggregatesFilter<"ApplicantJobs"> | Date | string
+    resumeApplicantId?: StringNullableWithAggregatesFilter<"ApplicantJobs"> | string | null
+    resumeJobId?: StringNullableWithAggregatesFilter<"ApplicantJobs"> | string | null
   }
 
   export type PasswordResetTokenWhereInput = {
@@ -12277,6 +12429,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     applicant: ApplicantsCreateNestedOneWithoutResumesInput
     job: JobsCreateNestedOneWithoutResumesInput
+    ApplicantJobs?: ApplicantJobsCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesUncheckedCreateInput = {
@@ -12287,6 +12440,7 @@ export namespace Prisma {
     resumeUrl: string
     submittedAt?: Date | string
     updatedAt?: Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesUpdateInput = {
@@ -12297,6 +12451,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applicant?: ApplicantsUpdateOneRequiredWithoutResumesNestedInput
     job?: JobsUpdateOneRequiredWithoutResumesNestedInput
+    ApplicantJobs?: ApplicantJobsUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesUncheckedUpdateInput = {
@@ -12307,6 +12462,7 @@ export namespace Prisma {
     resumeUrl?: StringFieldUpdateOperationsInput | string
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesCreateManyInput = {
@@ -12342,6 +12498,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -12357,6 +12514,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -12368,6 +12526,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12383,6 +12542,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12396,6 +12556,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -12407,6 +12568,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12420,6 +12582,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12432,6 +12595,7 @@ export namespace Prisma {
     appliedAt?: Date | string
     applicant: ApplicantsCreateNestedOneWithoutAppliedJobsInput
     job: JobsCreateNestedOneWithoutApplicantJobsInput
+    resume?: ResumesCreateNestedOneWithoutApplicantJobsInput
   }
 
   export type ApplicantJobsUncheckedCreateInput = {
@@ -12440,6 +12604,8 @@ export namespace Prisma {
     jobId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type ApplicantJobsUpdateInput = {
@@ -12448,6 +12614,7 @@ export namespace Prisma {
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applicant?: ApplicantsUpdateOneRequiredWithoutAppliedJobsNestedInput
     job?: JobsUpdateOneRequiredWithoutApplicantJobsNestedInput
+    resume?: ResumesUpdateOneWithoutApplicantJobsNestedInput
   }
 
   export type ApplicantJobsUncheckedUpdateInput = {
@@ -12456,6 +12623,8 @@ export namespace Prisma {
     jobId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicantJobsCreateManyInput = {
@@ -12464,6 +12633,8 @@ export namespace Prisma {
     jobId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type ApplicantJobsUpdateManyMutationInput = {
@@ -12478,6 +12649,8 @@ export namespace Prisma {
     jobId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PasswordResetTokenCreateInput = {
@@ -13064,6 +13237,11 @@ export namespace Prisma {
     isNot?: JobsWhereInput
   }
 
+  export type ResumesApplicantIdJobIdCompoundUniqueInput = {
+    applicantId: string
+    jobId: string
+  }
+
   export type ResumesCountOrderByAggregateInput = {
     id?: SortOrder
     applicantId?: SortOrder
@@ -13115,6 +13293,7 @@ export namespace Prisma {
     scheduleDate?: SortOrder
     scheduleTime?: SortOrder
     location?: SortOrder
+    linkMeet?: SortOrder
     status?: SortOrder
     mode?: SortOrder
     createdAt?: SortOrder
@@ -13128,6 +13307,7 @@ export namespace Prisma {
     scheduleDate?: SortOrder
     scheduleTime?: SortOrder
     location?: SortOrder
+    linkMeet?: SortOrder
     status?: SortOrder
     mode?: SortOrder
     createdAt?: SortOrder
@@ -13141,6 +13321,7 @@ export namespace Prisma {
     scheduleDate?: SortOrder
     scheduleTime?: SortOrder
     location?: SortOrder
+    linkMeet?: SortOrder
     status?: SortOrder
     mode?: SortOrder
     createdAt?: SortOrder
@@ -13174,12 +13355,19 @@ export namespace Prisma {
     not?: NestedEnumJobStatusFilter<$PrismaModel> | $Enums.JobStatus
   }
 
+  export type ResumesNullableScalarRelationFilter = {
+    is?: ResumesWhereInput | null
+    isNot?: ResumesWhereInput | null
+  }
+
   export type ApplicantJobsCountOrderByAggregateInput = {
     id?: SortOrder
     applicantId?: SortOrder
     jobId?: SortOrder
     status?: SortOrder
     appliedAt?: SortOrder
+    resumeApplicantId?: SortOrder
+    resumeJobId?: SortOrder
   }
 
   export type ApplicantJobsMaxOrderByAggregateInput = {
@@ -13188,6 +13376,8 @@ export namespace Prisma {
     jobId?: SortOrder
     status?: SortOrder
     appliedAt?: SortOrder
+    resumeApplicantId?: SortOrder
+    resumeJobId?: SortOrder
   }
 
   export type ApplicantJobsMinOrderByAggregateInput = {
@@ -13196,6 +13386,8 @@ export namespace Prisma {
     jobId?: SortOrder
     status?: SortOrder
     appliedAt?: SortOrder
+    resumeApplicantId?: SortOrder
+    resumeJobId?: SortOrder
   }
 
   export type EnumJobStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13766,6 +13958,20 @@ export namespace Prisma {
     connect?: JobsWhereUniqueInput
   }
 
+  export type ApplicantJobsCreateNestedManyWithoutResumeInput = {
+    create?: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput> | ApplicantJobsCreateWithoutResumeInput[] | ApplicantJobsUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ApplicantJobsCreateOrConnectWithoutResumeInput | ApplicantJobsCreateOrConnectWithoutResumeInput[]
+    createMany?: ApplicantJobsCreateManyResumeInputEnvelope
+    connect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+  }
+
+  export type ApplicantJobsUncheckedCreateNestedManyWithoutResumeInput = {
+    create?: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput> | ApplicantJobsCreateWithoutResumeInput[] | ApplicantJobsUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ApplicantJobsCreateOrConnectWithoutResumeInput | ApplicantJobsCreateOrConnectWithoutResumeInput[]
+    createMany?: ApplicantJobsCreateManyResumeInputEnvelope
+    connect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+  }
+
   export type ApplicantsUpdateOneRequiredWithoutResumesNestedInput = {
     create?: XOR<ApplicantsCreateWithoutResumesInput, ApplicantsUncheckedCreateWithoutResumesInput>
     connectOrCreate?: ApplicantsCreateOrConnectWithoutResumesInput
@@ -13780,6 +13986,34 @@ export namespace Prisma {
     upsert?: JobsUpsertWithoutResumesInput
     connect?: JobsWhereUniqueInput
     update?: XOR<XOR<JobsUpdateToOneWithWhereWithoutResumesInput, JobsUpdateWithoutResumesInput>, JobsUncheckedUpdateWithoutResumesInput>
+  }
+
+  export type ApplicantJobsUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput> | ApplicantJobsCreateWithoutResumeInput[] | ApplicantJobsUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ApplicantJobsCreateOrConnectWithoutResumeInput | ApplicantJobsCreateOrConnectWithoutResumeInput[]
+    upsert?: ApplicantJobsUpsertWithWhereUniqueWithoutResumeInput | ApplicantJobsUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: ApplicantJobsCreateManyResumeInputEnvelope
+    set?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    disconnect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    delete?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    connect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    update?: ApplicantJobsUpdateWithWhereUniqueWithoutResumeInput | ApplicantJobsUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: ApplicantJobsUpdateManyWithWhereWithoutResumeInput | ApplicantJobsUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: ApplicantJobsScalarWhereInput | ApplicantJobsScalarWhereInput[]
+  }
+
+  export type ApplicantJobsUncheckedUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput> | ApplicantJobsCreateWithoutResumeInput[] | ApplicantJobsUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ApplicantJobsCreateOrConnectWithoutResumeInput | ApplicantJobsCreateOrConnectWithoutResumeInput[]
+    upsert?: ApplicantJobsUpsertWithWhereUniqueWithoutResumeInput | ApplicantJobsUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: ApplicantJobsCreateManyResumeInputEnvelope
+    set?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    disconnect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    delete?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    connect?: ApplicantJobsWhereUniqueInput | ApplicantJobsWhereUniqueInput[]
+    update?: ApplicantJobsUpdateWithWhereUniqueWithoutResumeInput | ApplicantJobsUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: ApplicantJobsUpdateManyWithWhereWithoutResumeInput | ApplicantJobsUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: ApplicantJobsScalarWhereInput | ApplicantJobsScalarWhereInput[]
   }
 
   export type ApplicantsCreateNestedOneWithoutInterviewSchedulesInput = {
@@ -13830,6 +14064,12 @@ export namespace Prisma {
     connect?: JobsWhereUniqueInput
   }
 
+  export type ResumesCreateNestedOneWithoutApplicantJobsInput = {
+    create?: XOR<ResumesCreateWithoutApplicantJobsInput, ResumesUncheckedCreateWithoutApplicantJobsInput>
+    connectOrCreate?: ResumesCreateOrConnectWithoutApplicantJobsInput
+    connect?: ResumesWhereUniqueInput
+  }
+
   export type EnumJobStatusFieldUpdateOperationsInput = {
     set?: $Enums.JobStatus
   }
@@ -13848,6 +14088,16 @@ export namespace Prisma {
     upsert?: JobsUpsertWithoutApplicantJobsInput
     connect?: JobsWhereUniqueInput
     update?: XOR<XOR<JobsUpdateToOneWithWhereWithoutApplicantJobsInput, JobsUpdateWithoutApplicantJobsInput>, JobsUncheckedUpdateWithoutApplicantJobsInput>
+  }
+
+  export type ResumesUpdateOneWithoutApplicantJobsNestedInput = {
+    create?: XOR<ResumesCreateWithoutApplicantJobsInput, ResumesUncheckedCreateWithoutApplicantJobsInput>
+    connectOrCreate?: ResumesCreateOrConnectWithoutApplicantJobsInput
+    upsert?: ResumesUpsertWithoutApplicantJobsInput
+    disconnect?: ResumesWhereInput | boolean
+    delete?: ResumesWhereInput | boolean
+    connect?: ResumesWhereUniqueInput
+    update?: XOR<XOR<ResumesUpdateToOneWithWhereWithoutApplicantJobsInput, ResumesUpdateWithoutApplicantJobsInput>, ResumesUncheckedUpdateWithoutApplicantJobsInput>
   }
 
   export type ApplicantsCreateNestedOneWithoutPasswordResetTokenInput = {
@@ -14342,6 +14592,7 @@ export namespace Prisma {
     submittedAt?: Date | string
     updatedAt?: Date | string
     job: JobsCreateNestedOneWithoutResumesInput
+    ApplicantJobs?: ApplicantJobsCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesUncheckedCreateWithoutApplicantInput = {
@@ -14351,6 +14602,7 @@ export namespace Prisma {
     resumeUrl: string
     submittedAt?: Date | string
     updatedAt?: Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesCreateOrConnectWithoutApplicantInput = {
@@ -14368,6 +14620,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -14381,6 +14634,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -14402,6 +14656,7 @@ export namespace Prisma {
     status: $Enums.JobStatus
     appliedAt?: Date | string
     job: JobsCreateNestedOneWithoutApplicantJobsInput
+    resume?: ResumesCreateNestedOneWithoutApplicantJobsInput
   }
 
   export type ApplicantJobsUncheckedCreateWithoutApplicantInput = {
@@ -14409,6 +14664,8 @@ export namespace Prisma {
     jobId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type ApplicantJobsCreateOrConnectWithoutApplicantInput = {
@@ -14528,6 +14785,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
     scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
+    linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFilter<"InterviewSchedules"> | $Enums.InterviewMode
     createdAt?: DateTimeFilter<"InterviewSchedules"> | Date | string
@@ -14559,6 +14817,8 @@ export namespace Prisma {
     jobId?: StringFilter<"ApplicantJobs"> | string
     status?: EnumJobStatusFilter<"ApplicantJobs"> | $Enums.JobStatus
     appliedAt?: DateTimeFilter<"ApplicantJobs"> | Date | string
+    resumeApplicantId?: StringNullableFilter<"ApplicantJobs"> | string | null
+    resumeJobId?: StringNullableFilter<"ApplicantJobs"> | string | null
   }
 
   export type NotificationsUpsertWithWhereUniqueWithoutApplicantInput = {
@@ -14646,6 +14906,7 @@ export namespace Prisma {
     submittedAt?: Date | string
     updatedAt?: Date | string
     applicant: ApplicantsCreateNestedOneWithoutResumesInput
+    ApplicantJobs?: ApplicantJobsCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesUncheckedCreateWithoutJobInput = {
@@ -14655,6 +14916,7 @@ export namespace Prisma {
     resumeUrl: string
     submittedAt?: Date | string
     updatedAt?: Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumesCreateOrConnectWithoutJobInput = {
@@ -14672,6 +14934,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -14685,6 +14948,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -14706,6 +14970,7 @@ export namespace Prisma {
     status: $Enums.JobStatus
     appliedAt?: Date | string
     applicant: ApplicantsCreateNestedOneWithoutAppliedJobsInput
+    resume?: ResumesCreateNestedOneWithoutApplicantJobsInput
   }
 
   export type ApplicantJobsUncheckedCreateWithoutJobInput = {
@@ -14713,6 +14978,8 @@ export namespace Prisma {
     applicantId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type ApplicantJobsCreateOrConnectWithoutJobInput = {
@@ -14896,6 +15163,32 @@ export namespace Prisma {
     create: XOR<JobsCreateWithoutResumesInput, JobsUncheckedCreateWithoutResumesInput>
   }
 
+  export type ApplicantJobsCreateWithoutResumeInput = {
+    id?: string
+    status: $Enums.JobStatus
+    appliedAt?: Date | string
+    applicant: ApplicantsCreateNestedOneWithoutAppliedJobsInput
+    job: JobsCreateNestedOneWithoutApplicantJobsInput
+  }
+
+  export type ApplicantJobsUncheckedCreateWithoutResumeInput = {
+    id?: string
+    applicantId: string
+    jobId: string
+    status: $Enums.JobStatus
+    appliedAt?: Date | string
+  }
+
+  export type ApplicantJobsCreateOrConnectWithoutResumeInput = {
+    where: ApplicantJobsWhereUniqueInput
+    create: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput>
+  }
+
+  export type ApplicantJobsCreateManyResumeInputEnvelope = {
+    data: ApplicantJobsCreateManyResumeInput | ApplicantJobsCreateManyResumeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ApplicantsUpsertWithoutResumesInput = {
     update: XOR<ApplicantsUpdateWithoutResumesInput, ApplicantsUncheckedUpdateWithoutResumesInput>
     create: XOR<ApplicantsCreateWithoutResumesInput, ApplicantsUncheckedCreateWithoutResumesInput>
@@ -14988,6 +15281,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviewSchedules?: InterviewSchedulesUncheckedUpdateManyWithoutJobNestedInput
     applicantJobs?: ApplicantJobsUncheckedUpdateManyWithoutJobNestedInput
+  }
+
+  export type ApplicantJobsUpsertWithWhereUniqueWithoutResumeInput = {
+    where: ApplicantJobsWhereUniqueInput
+    update: XOR<ApplicantJobsUpdateWithoutResumeInput, ApplicantJobsUncheckedUpdateWithoutResumeInput>
+    create: XOR<ApplicantJobsCreateWithoutResumeInput, ApplicantJobsUncheckedCreateWithoutResumeInput>
+  }
+
+  export type ApplicantJobsUpdateWithWhereUniqueWithoutResumeInput = {
+    where: ApplicantJobsWhereUniqueInput
+    data: XOR<ApplicantJobsUpdateWithoutResumeInput, ApplicantJobsUncheckedUpdateWithoutResumeInput>
+  }
+
+  export type ApplicantJobsUpdateManyWithWhereWithoutResumeInput = {
+    where: ApplicantJobsScalarWhereInput
+    data: XOR<ApplicantJobsUpdateManyMutationInput, ApplicantJobsUncheckedUpdateManyWithoutResumeInput>
   }
 
   export type ApplicantsCreateWithoutInterviewSchedulesInput = {
@@ -15248,6 +15557,31 @@ export namespace Prisma {
     create: XOR<JobsCreateWithoutApplicantJobsInput, JobsUncheckedCreateWithoutApplicantJobsInput>
   }
 
+  export type ResumesCreateWithoutApplicantJobsInput = {
+    id?: string
+    resumeName: string
+    resumeUrl: string
+    submittedAt?: Date | string
+    updatedAt?: Date | string
+    applicant: ApplicantsCreateNestedOneWithoutResumesInput
+    job: JobsCreateNestedOneWithoutResumesInput
+  }
+
+  export type ResumesUncheckedCreateWithoutApplicantJobsInput = {
+    id?: string
+    applicantId: string
+    jobId: string
+    resumeName: string
+    resumeUrl: string
+    submittedAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumesCreateOrConnectWithoutApplicantJobsInput = {
+    where: ResumesWhereUniqueInput
+    create: XOR<ResumesCreateWithoutApplicantJobsInput, ResumesUncheckedCreateWithoutApplicantJobsInput>
+  }
+
   export type ApplicantsUpsertWithoutAppliedJobsInput = {
     update: XOR<ApplicantsUpdateWithoutAppliedJobsInput, ApplicantsUncheckedUpdateWithoutAppliedJobsInput>
     create: XOR<ApplicantsCreateWithoutAppliedJobsInput, ApplicantsUncheckedCreateWithoutAppliedJobsInput>
@@ -15340,6 +15674,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Resumes?: ResumesUncheckedUpdateManyWithoutJobNestedInput
     interviewSchedules?: InterviewSchedulesUncheckedUpdateManyWithoutJobNestedInput
+  }
+
+  export type ResumesUpsertWithoutApplicantJobsInput = {
+    update: XOR<ResumesUpdateWithoutApplicantJobsInput, ResumesUncheckedUpdateWithoutApplicantJobsInput>
+    create: XOR<ResumesCreateWithoutApplicantJobsInput, ResumesUncheckedCreateWithoutApplicantJobsInput>
+    where?: ResumesWhereInput
+  }
+
+  export type ResumesUpdateToOneWithWhereWithoutApplicantJobsInput = {
+    where?: ResumesWhereInput
+    data: XOR<ResumesUpdateWithoutApplicantJobsInput, ResumesUncheckedUpdateWithoutApplicantJobsInput>
+  }
+
+  export type ResumesUpdateWithoutApplicantJobsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resumeName?: StringFieldUpdateOperationsInput | string
+    resumeUrl?: StringFieldUpdateOperationsInput | string
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicant?: ApplicantsUpdateOneRequiredWithoutResumesNestedInput
+    job?: JobsUpdateOneRequiredWithoutResumesNestedInput
+  }
+
+  export type ResumesUncheckedUpdateWithoutApplicantJobsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    applicantId?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    resumeName?: StringFieldUpdateOperationsInput | string
+    resumeUrl?: StringFieldUpdateOperationsInput | string
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ApplicantsCreateWithoutPasswordResetTokenInput = {
@@ -15723,6 +16088,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -15734,6 +16100,8 @@ export namespace Prisma {
     jobId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type NotificationsCreateManyApplicantInput = {
@@ -15759,6 +16127,7 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobsUpdateOneRequiredWithoutResumesNestedInput
+    ApplicantJobs?: ApplicantJobsUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesUncheckedUpdateWithoutApplicantInput = {
@@ -15768,6 +16137,7 @@ export namespace Prisma {
     resumeUrl?: StringFieldUpdateOperationsInput | string
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesUncheckedUpdateManyWithoutApplicantInput = {
@@ -15784,6 +16154,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15797,6 +16168,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15809,6 +16181,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15820,6 +16193,7 @@ export namespace Prisma {
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobsUpdateOneRequiredWithoutApplicantJobsNestedInput
+    resume?: ResumesUpdateOneWithoutApplicantJobsNestedInput
   }
 
   export type ApplicantJobsUncheckedUpdateWithoutApplicantInput = {
@@ -15827,6 +16201,8 @@ export namespace Prisma {
     jobId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicantJobsUncheckedUpdateManyWithoutApplicantInput = {
@@ -15834,6 +16210,8 @@ export namespace Prisma {
     jobId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NotificationsUpdateWithoutApplicantInput = {
@@ -15899,6 +16277,7 @@ export namespace Prisma {
     scheduleDate: Date | string
     scheduleTime: Date | string
     location?: string | null
+    linkMeet?: string | null
     status: $Enums.ScheduleStatus
     mode: $Enums.InterviewMode
     createdAt?: Date | string
@@ -15910,6 +16289,8 @@ export namespace Prisma {
     applicantId: string
     status: $Enums.JobStatus
     appliedAt?: Date | string
+    resumeApplicantId?: string | null
+    resumeJobId?: string | null
   }
 
   export type ResumesUpdateWithoutJobInput = {
@@ -15919,6 +16300,7 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applicant?: ApplicantsUpdateOneRequiredWithoutResumesNestedInput
+    ApplicantJobs?: ApplicantJobsUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesUncheckedUpdateWithoutJobInput = {
@@ -15928,6 +16310,7 @@ export namespace Prisma {
     resumeUrl?: StringFieldUpdateOperationsInput | string
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ApplicantJobs?: ApplicantJobsUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumesUncheckedUpdateManyWithoutJobInput = {
@@ -15944,6 +16327,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15957,6 +16341,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15969,6 +16354,7 @@ export namespace Prisma {
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
     scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
     mode?: EnumInterviewModeFieldUpdateOperationsInput | $Enums.InterviewMode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15980,6 +16366,7 @@ export namespace Prisma {
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     applicant?: ApplicantsUpdateOneRequiredWithoutAppliedJobsNestedInput
+    resume?: ResumesUpdateOneWithoutApplicantJobsNestedInput
   }
 
   export type ApplicantJobsUncheckedUpdateWithoutJobInput = {
@@ -15987,11 +16374,47 @@ export namespace Prisma {
     applicantId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicantJobsUncheckedUpdateManyWithoutJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
+    status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumeApplicantId?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeJobId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ApplicantJobsCreateManyResumeInput = {
+    id?: string
+    applicantId: string
+    jobId: string
+    status: $Enums.JobStatus
+    appliedAt?: Date | string
+  }
+
+  export type ApplicantJobsUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicant?: ApplicantsUpdateOneRequiredWithoutAppliedJobsNestedInput
+    job?: JobsUpdateOneRequiredWithoutApplicantJobsNestedInput
+  }
+
+  export type ApplicantJobsUncheckedUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    applicantId?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicantJobsUncheckedUpdateManyWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    applicantId?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
     status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma-client";
-import { IJobs } from "../../../../types";
+import { IJobs } from "@/types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -41,11 +41,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
+  const jobId = request.nextUrl.searchParams.get("jobId");
 
   const data: IJobs = await request.json();
 
-  if (!uuid)
+  if (!jobId)
     return Response.json(
       { message: "UUID not found, please check again" },
       { status: 404 }
@@ -53,7 +53,7 @@ export async function PUT(request: NextRequest) {
 
   const updateData = await prisma.$transaction([
     prisma.jobs.update({
-      where: { id: uuid },
+      where: { id: jobId },
       data,
     }),
   ]);
@@ -65,14 +65,14 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const uuid = request.nextUrl.searchParams.get("uuid");
-
-  if (!uuid)
+  const id = request.nextUrl.searchParams.get("jobId");
+  console.log(id);
+  if (!id)
     return Response.json(
       { message: "UUID not found, please check again" },
       { status: 404 }
     );
-  const job = await prisma.jobs.delete({ where: { id: uuid } });
+  const job = await prisma.jobs.delete({ where: { id } });
 
   return Response.json({
     message: `Success Deleted job with id : ${job.id}`,

@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { IApplicants } from "../../../../types";
+import { IApplicants } from "@/types";
 import { sendOTPVerification } from "@/lib/email/services/otp";
 import { createSession } from "@/lib/session";
 

@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { IJobs } from "../../../../../types";
+import { IJobs } from "@/types";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/public/navbar";
 import {
@@ -44,7 +44,7 @@ export default function JobPage() {
     <>
       <Navbar />
       <main className="w-full px-4 py-6 text-white bg-black">
-        <section className="max-w-7xl h-full ml-12  border-b border-gray-700 pb-2">
+        <section className="max-w-7xl h-full md:ml-12  border-b border-gray-700 pb-2">
           <div className="flex flex-col justify-between w-full">
             <div className="flex justify-between mb-3">
               <h1 className="text-3xl font-bold">
@@ -82,8 +82,8 @@ export default function JobPage() {
                 )}
               </span>
             </div>
-            <div className="flex justify-between text-muted-foreground">
-              <div className="flex items-center gap-2 text-sm ">
+            <div className="flex md:flex-row flex-col gap-4 justify-between text-muted-foreground">
+              <div className="flex  items-center gap-2 text-sm ">
                 <Clock size={16} />
                 <div className="flex gap-2">
                   <span className="text-muted-foreground flex">
@@ -108,7 +108,7 @@ export default function JobPage() {
               session?.user.role === "HR" ? (
                 <Button
                   disabled
-                  className="bg-gray-300 text-gray-500 w-[150px]"
+                  className="bg-gray-300 text-gray-500 w-[150px] self-end"
                 >
                   {isPending ? (
                     <LoaderCircle className="animate-spin" />
@@ -117,14 +117,17 @@ export default function JobPage() {
                   )}
                 </Button>
               ) : (
-                <Button className="bg-[#5271FF] hover:bg-blue-700 text-white w-[150px]">
+                <Button
+                  className="bg-[#5271FF] hover:bg-blue-700 text-white w-[150px] self-end"
+                  asChild
+                >
                   <Link href={`${data?.id}/apply`}>Lamar</Link>
                 </Button>
               )}
             </div>
           </div>
         </section>
-        <section className="max-w-4xl ml-12 mt-6 space-y-6 text-sm leading-relaxed text-gray-300">
+        <section className="max-w-4xl md:ml-12 mt-6 space-y-6 text-sm leading-relaxed text-gray-300">
           <div>
             <h2 className="text-white text-lg font-semibold mb-1">Deskripsi</h2>
             {data?.description ? (

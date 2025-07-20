@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IJobs } from "../../types";
+import { IJobs } from "@/types";
 
 export const useSearchJobs = (data: IJobs[] | undefined) => {
   const [searchQuery, setSearchQuery] = useState("");

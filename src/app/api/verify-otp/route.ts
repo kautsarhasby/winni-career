@@ -5,6 +5,8 @@ export async function POST(request: NextRequest) {
   const data: { otp: number } = await request.json();
 
   const { otp } = data;
+
+
   try {
     const res = await verifyOTP({ otp });
 

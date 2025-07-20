@@ -4,9 +4,9 @@ import React from "react";
 
 export default function TopBar() {
   return (
-    <main className="h-[70px] items-center flex justify-between">
+    <main className="h-[70px] w-full items-center flex justify-between bg-[#111111] px-6">
       <div>
-        <h1>Dashboard</h1>
+        <h1 className="font-semibold">Dashboard</h1>
       </div>
       <div>
         <Button variant={"ghost"} size={"icon"}>

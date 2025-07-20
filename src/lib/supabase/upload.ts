@@ -19,5 +19,6 @@ export async function uploadPdf(file: File, userId: string) {
   }
 
   console.log("Upload success:", data);
+
   return data;
 }
