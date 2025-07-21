@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma-client";
-import { IResumes } from "../../../../types";
+import { IResumes } from "@/types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
