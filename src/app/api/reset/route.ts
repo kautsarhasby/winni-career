@@ -1,7 +1,6 @@
 "use server";
 import { sendResetEmail } from "@/lib/email/services/send-email";
 import { prisma } from "@/lib/prisma-client";
-import { IApplicants } from "@/types";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
