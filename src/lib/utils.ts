@@ -3,11 +3,10 @@ import { z } from "zod";
 import { FormState } from "./definition";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma-client";
-import { Prisma, PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@/generated/prisma";
 import { clsx, type ClassValue } from "clsx";
 import { randomInt } from "crypto";
 import { twMerge } from "tailwind-merge";
-import { DefaultArgs } from "@/generated/prisma/runtime/library";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -58,17 +57,7 @@ export async function genericSignUp<T extends z.ZodObject<any>>(
 
   try {
     await prisma.$transaction(
-      async (
-        tx: Omit<
-          PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
-          | "$connect"
-          | "$disconnect"
-          | "$on"
-          | "$transaction"
-          | "$use"
-          | "$extends"
-        >
-      ) => {
+      async (tx) => {
         await options.createFn(
           { ...rest, hashedPassword } as z.infer<T> & {
             hashedPassword: string;
