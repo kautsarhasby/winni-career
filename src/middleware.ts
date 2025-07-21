@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 async function verifySessionJWT(token: string) {
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const secret = new TextEncoder().encode(process.env.SESSION_SECRET);
     const { payload } = await jwtVerify(token, secret);
     return payload;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,7 +21,15 @@ export default withAuth(
 
     let sessionPayload = null;
     if (session) {
+      console.log("session :", session);
       sessionPayload = await verifySessionJWT(session);
+    }
+    if (pathname.startsWith("/auth/otp")) {
+      if (!sessionPayload) {
+        return NextResponse.redirect(new URL("/", req.url));
+      } else {
+        return NextResponse.next();
+      }
     }
 
     if (pathname.match(/^\/jobs\/[^\/]+\/apply$/) && !token) {
@@ -29,10 +37,6 @@ export default withAuth(
     }
 
     if (!token) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
-
-    if (!sessionPayload && pathname.startsWith("/auth/otp")) {
       return NextResponse.redirect(new URL("/", req.url));
     }
 

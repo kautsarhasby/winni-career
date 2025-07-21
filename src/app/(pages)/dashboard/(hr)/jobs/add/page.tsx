@@ -15,6 +15,8 @@ import { addJobs } from "@/app/actions/jobs";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const RichTextEditor = dynamic(
   () => import("@/components/dashboard/richtext"),
@@ -23,12 +25,19 @@ const RichTextEditor = dynamic(
 
 export default function AddJobsPage() {
   const { data: session } = useSession();
-
+  const router = useRouter();
   const [qualification, setQualification] = useState<string>("");
 
   const { isPending, mutate } = useMutation({
     mutationFn: addJobs,
-    onError: (err) => console.log(err),
+    onError: (err) => {
+      toast.error(err?.message || "Terjadi kesalahan saat menambahkan job");
+      console.log(err);
+    },
+    onSuccess: () => {
+      toast.success("Job berhasil ditambahkan!");
+      router.push("/dashboard/jobs");
+    },
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -58,7 +67,7 @@ export default function AddJobsPage() {
 
   return (
     <main className="h-full w-full flex  p-4">
-      <form className="w-full border" onSubmit={handleSubmit}>
+      <form className="w-full" onSubmit={handleSubmit}>
         <div className="mb-3">
           <Label htmlFor="position">Job&apos;s Position</Label>
           <Input
