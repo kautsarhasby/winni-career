@@ -65,7 +65,10 @@ export async function genericSignUp<T extends z.ZodObject<any>>(
           tx
         );
       },
-      { maxWait: 10000, timeout: 30000 }
+      {
+        maxWait: 5000,
+        timeout: 15000,
+      }
     );
     return { message: "Registrasi Berhasil", success: true };
   } catch (error: any) {
