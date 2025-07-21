@@ -28,7 +28,7 @@ declare module "next-auth" {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   pages: { signIn: "/auth/sign_in", signOut: "/auth/sign_out" },
   providers: [
     GoogleProvider({
