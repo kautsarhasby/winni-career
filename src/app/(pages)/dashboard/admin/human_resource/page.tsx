@@ -3,7 +3,7 @@ import { FormDialog } from "@/components/dashboard/form-dialog";
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { IUsers } from "../../../../../../types";
+import { IUsers } from "@/types";
 
 export default function HRListPage() {
   const { data: human_resources, isPending } = useQuery({
