@@ -29,8 +29,8 @@ export default function StatusPage() {
   });
 
   return (
-    <main className="h-screen w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
-      <section className=" w-[550px] h-full flex items-center">
+    <main className="min-h-screen w-full flex flex-col items-center justify-between bg-gradient-to-r from-[#314499] via-[#AF289D] to-[#314499]">
+      <section className="w-full max-w-[550px] flex-grow flex items-center justify-center">
         <CardStatus status={statusData?.status as JobStatus} />
       </section>
       <FooterInput />

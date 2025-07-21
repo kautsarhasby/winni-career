@@ -112,7 +112,7 @@ model InterviewSchedules{
   job Jobs @relation(fields: [jobId], references: [id])
   jobId String 
   scheduleDate DateTime
-  scheduleTime DateTime
+  scheduleTime String
   location String?
   linkMeet String?
   status ScheduleStatus

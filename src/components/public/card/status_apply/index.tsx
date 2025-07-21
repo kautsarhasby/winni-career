@@ -45,12 +45,13 @@ export default function ApplicationStatusCard({
   // Fungsi untuk cek apakah step aktif
   const isStepActive = (stepId: JobStatus) => {
     const currentIndex = [...statusOrder, status].indexOf(status);
+    console.log(currentIndex);
     const stepIndex = [...statusOrder, stepId].indexOf(stepId);
     return stepIndex <= currentIndex;
   };
 
   return (
-    <Card className="w-full max-w-xl mx-auto p-6">
+    <Card className="w-full max-w-xl mx-auto p-6 rounded-none">
       <CardHeader>
         <CardTitle>Terimakasih sudah mendaftar</CardTitle>
         <CardDescription>

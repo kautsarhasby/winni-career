@@ -6652,7 +6652,7 @@ export namespace Prisma {
     applicantId: string | null
     jobId: string | null
     scheduleDate: Date | null
-    scheduleTime: Date | null
+    scheduleTime: string | null
     location: string | null
     linkMeet: string | null
     status: $Enums.ScheduleStatus | null
@@ -6666,7 +6666,7 @@ export namespace Prisma {
     applicantId: string | null
     jobId: string | null
     scheduleDate: Date | null
-    scheduleTime: Date | null
+    scheduleTime: string | null
     location: string | null
     linkMeet: string | null
     status: $Enums.ScheduleStatus | null
@@ -6811,7 +6811,7 @@ export namespace Prisma {
     applicantId: string
     jobId: string
     scheduleDate: Date
-    scheduleTime: Date
+    scheduleTime: string
     location: string | null
     linkMeet: string | null
     status: $Enums.ScheduleStatus
@@ -6924,7 +6924,7 @@ export namespace Prisma {
       applicantId: string
       jobId: string
       scheduleDate: Date
-      scheduleTime: Date
+      scheduleTime: string
       location: string | null
       linkMeet: string | null
       status: $Enums.ScheduleStatus
@@ -7360,7 +7360,7 @@ export namespace Prisma {
     readonly applicantId: FieldRef<"InterviewSchedules", 'String'>
     readonly jobId: FieldRef<"InterviewSchedules", 'String'>
     readonly scheduleDate: FieldRef<"InterviewSchedules", 'DateTime'>
-    readonly scheduleTime: FieldRef<"InterviewSchedules", 'DateTime'>
+    readonly scheduleTime: FieldRef<"InterviewSchedules", 'String'>
     readonly location: FieldRef<"InterviewSchedules", 'String'>
     readonly linkMeet: FieldRef<"InterviewSchedules", 'String'>
     readonly status: FieldRef<"InterviewSchedules", 'ScheduleStatus'>
@@ -11800,7 +11800,7 @@ export namespace Prisma {
     applicantId?: StringFilter<"InterviewSchedules"> | string
     jobId?: StringFilter<"InterviewSchedules"> | string
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
-    scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
+    scheduleTime?: StringFilter<"InterviewSchedules"> | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
     linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
@@ -11835,7 +11835,7 @@ export namespace Prisma {
     applicantId?: StringFilter<"InterviewSchedules"> | string
     jobId?: StringFilter<"InterviewSchedules"> | string
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
-    scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
+    scheduleTime?: StringFilter<"InterviewSchedules"> | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
     linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
@@ -11871,7 +11871,7 @@ export namespace Prisma {
     applicantId?: StringWithAggregatesFilter<"InterviewSchedules"> | string
     jobId?: StringWithAggregatesFilter<"InterviewSchedules"> | string
     scheduleDate?: DateTimeWithAggregatesFilter<"InterviewSchedules"> | Date | string
-    scheduleTime?: DateTimeWithAggregatesFilter<"InterviewSchedules"> | Date | string
+    scheduleTime?: StringWithAggregatesFilter<"InterviewSchedules"> | string
     location?: StringNullableWithAggregatesFilter<"InterviewSchedules"> | string | null
     linkMeet?: StringNullableWithAggregatesFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusWithAggregatesFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
@@ -12496,7 +12496,7 @@ export namespace Prisma {
   export type InterviewSchedulesCreateInput = {
     id?: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -12512,7 +12512,7 @@ export namespace Prisma {
     applicantId: string
     jobId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -12524,7 +12524,7 @@ export namespace Prisma {
   export type InterviewSchedulesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -12540,7 +12540,7 @@ export namespace Prisma {
     applicantId?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -12554,7 +12554,7 @@ export namespace Prisma {
     applicantId: string
     jobId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -12566,7 +12566,7 @@ export namespace Prisma {
   export type InterviewSchedulesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -12580,7 +12580,7 @@ export namespace Prisma {
     applicantId?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -14618,7 +14618,7 @@ export namespace Prisma {
   export type InterviewSchedulesCreateWithoutApplicantInput = {
     id?: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -14632,7 +14632,7 @@ export namespace Prisma {
     id?: string
     jobId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -14783,7 +14783,7 @@ export namespace Prisma {
     applicantId?: StringFilter<"InterviewSchedules"> | string
     jobId?: StringFilter<"InterviewSchedules"> | string
     scheduleDate?: DateTimeFilter<"InterviewSchedules"> | Date | string
-    scheduleTime?: DateTimeFilter<"InterviewSchedules"> | Date | string
+    scheduleTime?: StringFilter<"InterviewSchedules"> | string
     location?: StringNullableFilter<"InterviewSchedules"> | string | null
     linkMeet?: StringNullableFilter<"InterviewSchedules"> | string | null
     status?: EnumScheduleStatusFilter<"InterviewSchedules"> | $Enums.ScheduleStatus
@@ -14932,7 +14932,7 @@ export namespace Prisma {
   export type InterviewSchedulesCreateWithoutJobInput = {
     id?: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -14946,7 +14946,7 @@ export namespace Prisma {
     id?: string
     applicantId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -16086,7 +16086,7 @@ export namespace Prisma {
     id?: string
     jobId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -16152,7 +16152,7 @@ export namespace Prisma {
   export type InterviewSchedulesUpdateWithoutApplicantInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -16166,7 +16166,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -16179,7 +16179,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -16275,7 +16275,7 @@ export namespace Prisma {
     id?: string
     applicantId: string
     scheduleDate: Date | string
-    scheduleTime: Date | string
+    scheduleTime: string
     location?: string | null
     linkMeet?: string | null
     status: $Enums.ScheduleStatus
@@ -16325,7 +16325,7 @@ export namespace Prisma {
   export type InterviewSchedulesUpdateWithoutJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -16339,7 +16339,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
@@ -16352,7 +16352,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     scheduleDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheduleTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleTime?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     linkMeet?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus

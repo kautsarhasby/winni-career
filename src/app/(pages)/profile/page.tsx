@@ -27,12 +27,14 @@ export default function ProfilPage() {
     session?.user.id ?? ""
   );
   return (
-    <main className="w-full flex flex-col ">
+    <main className="w-full flex flex-col">
       <Navbar />
-      <section className="items-start grid grid-cols-3 h-full">
-        <div className="container p-10 flex items-center h-full  justify-center">
-          <Card className="w-full h-72">
-            <CardHeader className="">
+      <section className="grid grid-cols-1 md:grid-cols-3 h-full">
+        {/* Kartu Pekerjaan */}
+
+        <div className="p-4 md:p-10 flex items-center justify-center">
+          <Card className="w-full h-full md:h-72">
+            <CardHeader>
               <CardTitle>Pekerjaan yang dilamar</CardTitle>
             </CardHeader>
             <CardContent>
@@ -74,13 +76,12 @@ export default function ProfilPage() {
                       className="flex justify-between items-center gap-3 mb-2"
                     >
                       <Label>{job_apply?.job.position}</Label>
-
                       <div className="flex items-center gap-2">
-                        <Badge variant={"outline"} className={badgeClass}>
+                        <Badge variant="outline" className={badgeClass}>
                           <Clock className="w-4 h-4 mr-1" />
                           {text}
                         </Badge>
-                        <Button variant={"ghost"} className="cursor-pointer">
+                        <Button variant="ghost" className="cursor-pointer">
                           <EllipsisVertical />
                         </Button>
                       </div>
@@ -91,64 +92,9 @@ export default function ProfilPage() {
             </CardContent>
           </Card>
         </div>
-        <div className="flex w-full  h-full  flex-col justify-center">
-          <div className="flex gap-3 items-center border-white border-b py-6">
-            <UserCircle className="w-[72px] h-[72px]" />
-            <section>
-              <span className="text-2xl">{session?.user.fullname}</span>
-              <p>Applicant</p>
-            </section>
-          </div>
-          <div className="w-full">
-            <form action="" className="py-4">
-              <div className="mb-4">
-                <Label htmlFor="fullname" className="mb-2">
-                  Nama Lengkap
-                </Label>
-                <Input
-                  id="fullname"
-                  name="fullname"
-                  placeholder="Nama Lengkap"
-                  defaultValue={session?.user.fullname}
-                />
-              </div>
-              <div className="mb-4">
-                <Label htmlFor="email" className="mb-2">
-                  Email
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  disabled
-                  defaultValue={session?.user.email as string}
-                />
-              </div>
-              <div className="mb-4 ">
-                <Label htmlFor="about" className="mb-2">
-                  About
-                </Label>
-                <Textarea
-                  id="about"
-                  name="about"
-                  placeholder="Tentang dirimu..."
-                  className="resize-none h-40"
-                />
-              </div>
-              <div
-                className="justify-end flex
-              "
-              >
-                <Button className="bg-[#5271FF] text-white">
-                  Simpan Perubahan
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="container p-10 flex items-center h-full  justify-center">
-          <Card className="w-full h-72">
-            <CardHeader className="">
+        <div className="p-4 md:p-10 flex items-center justify-center">
+          <Card className="w-full h-full md:h-72">
+            <CardHeader>
               <CardTitle>Tanggal Interview Dan Tempat</CardTitle>
               <CardDescription>
                 Silahkan cek email anda untuk link meeting atau info lebih
@@ -187,13 +133,10 @@ export default function ProfilPage() {
                   return (
                     <div
                       key={i}
-                      className="flex justify-between bg-muted p-2 rounded-xl"
+                      className="flex flex-wrap md:flex-nowrap justify-between bg-muted p-2 rounded-xl gap-4"
                     >
                       {labels.map((item) => (
-                        <div
-                          key={item.label}
-                          className="flex flex-col justify-between"
-                        >
+                        <div key={item.label} className="flex flex-col">
                           <span className="text-muted-foreground">
                             {item.label}
                           </span>
@@ -207,6 +150,60 @@ export default function ProfilPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Form Profil */}
+        <div className="p-4 md:p-10 flex w-full h-full flex-col justify-center">
+          <div className="flex flex-col md:flex-row gap-3 items-center border-white border-b py-6">
+            <UserCircle className="w-[72px] h-[72px]" />
+            <section className="text-center md:text-left">
+              <span className="text-2xl">{session?.user.fullname}</span>
+              <p>Applicant</p>
+            </section>
+          </div>
+          <form action="" className="py-4">
+            <div className="mb-4">
+              <Label htmlFor="fullname" className="mb-2">
+                Nama Lengkap
+              </Label>
+              <Input
+                id="fullname"
+                name="fullname"
+                placeholder="Nama Lengkap"
+                defaultValue={session?.user.fullname}
+              />
+            </div>
+            <div className="mb-4">
+              <Label htmlFor="email" className="mb-2">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                placeholder="email@example.com"
+                disabled
+                defaultValue={session?.user.email as string}
+              />
+            </div>
+            <div className="mb-4">
+              <Label htmlFor="about" className="mb-2">
+                About
+              </Label>
+              <Textarea
+                id="about"
+                name="about"
+                placeholder="Tentang dirimu..."
+                className="resize-none h-40"
+              />
+            </div>
+            <div className="justify-end flex">
+              <Button className="bg-[#5271FF] text-white">
+                Simpan Perubahan
+              </Button>
+            </div>
+          </form>
+        </div>
+
+        {/* Jadwal Interview */}
       </section>
     </main>
   );

@@ -11,7 +11,7 @@ import supabase from "@/lib/supabase/client";
 export default function ActionCell({ applyId }: { applyId: string }) {
   const handleChange = async (newStatus: string) => {
     const { error } = await supabase
-      .from("applicants_jobs")
+      .from("applicant_jobs")
       .update({ status: newStatus })
       .eq("id", applyId);
 
@@ -19,6 +19,7 @@ export default function ActionCell({ applyId }: { applyId: string }) {
       console.error("Gagal update status:", error.message);
     } else {
       console.log(`Status berhasil diubah ke ${newStatus}`);
+      window.location.reload();
     }
   };
   return (
@@ -27,7 +28,7 @@ export default function ActionCell({ applyId }: { applyId: string }) {
         <SelectValue placeholder="Pilih aksi" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="REVIEWED">Terima</SelectItem>
+        <SelectItem value="ACCEPTED">Terima</SelectItem>
         <SelectItem value="REJECTED">Tolak</SelectItem>
       </SelectContent>
     </Select>

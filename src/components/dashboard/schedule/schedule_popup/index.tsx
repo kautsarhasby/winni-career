@@ -19,22 +19,36 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ISchedules, InterviewMode, ScheduleStatus } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface SchedulePopupProps {
   applicantId: string;
   jobId: string;
+  fullname: string;
+  email: string;
 }
 
-export function SchedulePopup({ applicantId, jobId }: SchedulePopupProps) {
+export function SchedulePopup({
+  applicantId,
+  jobId,
+  email,
+  fullname,
+}: SchedulePopupProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
   const [mode, setMode] = useState("");
   const [linkMeet, setLinkMeet] = useState("");
   const [status, setStatus] = useState("");
+  const router = useRouter();
 
   const mutation = useMutation({
-    mutationFn: async (payload: Omit<ISchedules, "id">) => {
+    mutationFn: async (
+      payload: Omit<ISchedules, "id"> & {
+        email: string;
+        fullname: string;
+      }
+    ) => {
       const res = await fetch("/api/schedules", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,6 +74,8 @@ export function SchedulePopup({ applicantId, jobId }: SchedulePopupProps) {
           isRead: false,
         }),
       });
+
+      router.push("/dashboard/schedules");
     },
   });
 
@@ -69,8 +85,10 @@ export function SchedulePopup({ applicantId, jobId }: SchedulePopupProps) {
     mutation.mutate({
       applicantId,
       jobId,
+      email: email,
+      fullname: fullname,
       scheduleDate: new Date(`${date}T${time}`),
-      scheduleTime: new Date(`${date}T${time}`),
+      scheduleTime: time,
       location,
       mode: mode as InterviewMode,
       linkMeet,

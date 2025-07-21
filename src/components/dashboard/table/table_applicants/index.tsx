@@ -92,6 +92,8 @@ export const columns: ColumnDef<IApply>[] = [
         <SchedulePopup
           applicantId={row.original.applicantId}
           jobId={row.original.jobId}
+          email={row.original.applicant.email}
+          fullname={row.original.applicant.fullname}
         />
       </div>
     ),

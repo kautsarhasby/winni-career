@@ -1,3 +1,4 @@
+import { sendMeetEmail } from "@/lib/email/services/send-email";
 import { prisma } from "@/lib/prisma-client";
 import { ISchedules } from "@/types";
 import { NextRequest } from "next/server";
@@ -59,14 +60,39 @@ export async function GET(request: NextRequest) {
   });
 }
 
+type schedulesPayload = ISchedules & { email: string; fullname: string };
+
 export async function POST(request: NextRequest) {
-  const data: ISchedules = await request.json();
+  const data: schedulesPayload = await request.json();
 
   await prisma.$transaction([
     prisma.interviewSchedules.create({
-      data,
+      data: {
+        mode: data.mode,
+        scheduleDate: data.scheduleDate,
+        scheduleTime: data.scheduleTime,
+        status: data.status,
+        linkMeet: data.linkMeet,
+        location: data.location,
+        applicantId: data.applicantId,
+        jobId: data.jobId,
+      },
     }),
   ]);
+  const date = new Date(data.scheduleDate);
+  const scheduleDate = date.toLocaleDateString("id-ID", {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  });
+
+  await sendMeetEmail({
+    email: data.email,
+    fullname: data.fullname,
+    meetingLink: data.linkMeet,
+    scheduleDate,
+    scheduleTime: data.scheduleTime,
+  });
 
   return Response.json(
     { message: "Successfully added data", data },

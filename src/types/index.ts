@@ -47,7 +47,7 @@ export interface ISchedules {
   applicantId: string;
   jobId: string;
   scheduleDate: Date;
-  scheduleTime: Date;
+  scheduleTime: string;
   location?: string;
   linkMeet?: string;
   status: ScheduleStatus;
