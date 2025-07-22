@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             fullname: data.fullname,
             birthdate: new Date(data.birthdate),
             password: data.hashedPassword,
-            gender: data.gender,
+            gender: data.gender as "MALE" | "FEMALE",
           },
         });
 

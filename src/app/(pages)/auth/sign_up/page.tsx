@@ -5,13 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { FormState } from "@/lib/definition";
+import { FormState, SignupFormApplicantSchema } from "@/lib/definition";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircleIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
+
+type ApplicantPayload = z.infer<typeof SignupFormApplicantSchema>;
+type ErrorResponse = {
+  message: string;
+  errors?: Record<string, string[]>;
+};
 
 export default function SignUp() {
   const [birthdate, setBirthdate] = useState("");
@@ -19,7 +26,7 @@ export default function SignUp() {
     fullname: "",
     email: "",
     password: "",
-    gender: "MALE",
+    gender: "",
   });
   const [formState, setFormState] = useState<FormState>({
     values: {},
@@ -43,12 +50,11 @@ export default function SignUp() {
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (payload: any) => {
+    mutationFn: async (payload: ApplicantPayload) => {
       const formData = new FormData();
       formData.append("fullname", payload.fullname);
       formData.append("email", payload.email);
       formData.append("password", payload.password);
-      formData.append("birthdate", payload.birthdate);
       formData.append("gender", payload.gender);
       const res = await fetch("/api/auth/sign_up", {
         method: "POST",
@@ -70,7 +76,7 @@ export default function SignUp() {
         setFormState(data);
       }
     },
-    onError: (error: any) => {
+    onError: (error: ErrorResponse) => {
       setFormState((prev) => ({
         ...prev,
         message: error?.message ?? "Terjadi kesalahan",

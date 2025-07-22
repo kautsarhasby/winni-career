@@ -17,7 +17,7 @@ export const SignupFormApplicantSchema = z.object({
       message: "Contain at least one special character.",
     })
     .trim(),
-  gender: z.enum(["MALE", "FEMALE"], {
+  gender: z.string({
     message: "Must choose one of the gender",
   }),
 });
