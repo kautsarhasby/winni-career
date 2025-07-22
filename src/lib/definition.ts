@@ -51,17 +51,15 @@ export interface SessionPayload extends JWTPayload {
   expiredOTP: Date | null | undefined;
 }
 
-export type FormState =
-  | {
-      values?: Partial<z.infer<typeof SignupFormApplicantSchema>>;
-      errors?: {
-        fullname?: string[];
-        email?: string[];
-        password?: string[];
-        gender?: string[];
-        birthdate?: string[];
-      };
-      message?: string;
-      success?: boolean;
-    }
-  | undefined;
+export type FormState = {
+  values?: Partial<z.infer<typeof SignupFormApplicantSchema>>;
+  errors?: {
+    fullname?: string[];
+    email?: string[];
+    password?: string[];
+    gender?: string[];
+    birthdate?: string[];
+  };
+  message?: string;
+  success?: boolean;
+};
