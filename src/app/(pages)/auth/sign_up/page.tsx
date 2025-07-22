@@ -26,7 +26,7 @@ export default function SignUp() {
     fullname: "",
     email: "",
     password: "",
-    gender: "",
+    gender: "MALE",
   });
   const [formState, setFormState] = useState<FormState>({
     values: {},
@@ -56,6 +56,7 @@ export default function SignUp() {
       formData.append("email", payload.email);
       formData.append("password", payload.password);
       formData.append("gender", payload.gender);
+      formData.append("birthdate", birthdate);
       const res = await fetch("/api/auth/sign_up", {
         method: "POST",
         body: formData,
