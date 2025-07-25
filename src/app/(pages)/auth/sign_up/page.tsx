@@ -72,7 +72,7 @@ export default function SignUp() {
     },
     onSuccess: (data) => {
       if (data.success) {
-        window.location.href = "/auth/otp";
+        window.location.href = "/otp";
       } else {
         setFormState(data);
       }
