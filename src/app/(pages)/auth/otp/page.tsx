@@ -56,7 +56,7 @@ export default function OTPPage() {
     },
     onSuccess: () => {
       Cookies.remove("session");
-      router.push("/sign_in");
+      router.push("/auth/sign_in");
     },
   });
 
